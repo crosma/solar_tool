@@ -53,11 +53,12 @@ export class MainChartComponent implements OnInit, OnChanges {
 
       var chart = new google.visualization.ComboChart(this.containerElement);
       chart.draw(google.visualization.arrayToDataTable(this.data), {
+        height: 300,
         chartArea: {
-          right: 0,
           top: 7,
-          width: "90%",
+          right: 0,
           bottom: 40,
+          left: 45,
         },
         //width: '100%',
         legend: {position: 'bottom'},

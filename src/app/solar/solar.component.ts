@@ -6,7 +6,7 @@ import {Battery, BatteryTypes} from './batteries';
   // moduleId: module.id,
   selector: 'app-solar',
   templateUrl: 'solar.component.html',
-  styleUrls: ['solar.component.css'],
+  styleUrls: ['solar.component.scss'],
 })
 export class SolarComponent implements OnInit {
   consumers = BasicConsumers;

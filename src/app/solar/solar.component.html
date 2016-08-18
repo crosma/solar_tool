@@ -1,3 +1,9 @@
+<div class="row row-chart">
+  <div class="col-md-12">
+    <app-main-chart [data]="chartData" [batteryAmpHours]="batteryAmpHours" style="height: 400px;"></app-main-chart>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-5">
 
@@ -161,19 +167,6 @@
       <tr>
         <th>Total Amp Hours Consumed</th>
         <td>{{ (wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>
-      </tr>
-    </tbody>
-    </table>
-
-    <app-main-chart [data]="chartData" [batteryAmpHours]="batteryAmpHours"></app-main-chart>
-
-    <table class="table table-striped table-bordered table-condensed">
-    <caption>Graph Data</caption>
-    <tbody>
-      <tr *ngFor="let hour of hours;">
-        <td>X</td>
-        <td>{{ hour.createdAmps | number:'1.1-1' }}</td>
-        <td>{{ hour.usedAmps | number:'1.1-1' }}</td>
       </tr>
     </tbody>
     </table>
