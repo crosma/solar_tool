@@ -92,7 +92,6 @@ export class SolarComponent implements OnInit {
 
     let currentBatteryAmps = this.batteryAmpHours;
     this.chartData = [];
-    this.chartData.push(['Day, Hour', 'Amps Created', 'Amps Consumed', 'Battery Charge']);
 
     this.hours = [];
     for (let day = 1; day <= 3; day++) {
@@ -117,11 +116,20 @@ export class SolarComponent implements OnInit {
 
         this.hours.push(hour);
 
+        //todo pass the hours array to the chart, build chartData in chart code
         this.chartData.push([
-          {v: (day - 1) * 24 + h, f: `Day ${day}, Hour ${h}`} ,
+          {v: (day - 1) * 24 + h, f: `Day ${day}, Hour ${this.hourToAmPm(h)}`},
+          //`Day ${day}, Hour ${this.hourToAmPm(h)}`,
           hour.createdAmps,
           hour.usedAmps,
-          currentBatteryAmps
+          currentBatteryAmps,
+          currentBatteryAmps < this.batteryAmpHours * 0.5 ? 'color: #FF0000' : '',
+          this.batteryAmpHours * 0.5,
+          false,
+          this.batteryAmpHours * 0.4,
+          false,
+          this.batteryAmpHours * 0.3,
+          false,
         ]);
 
         currentBatteryAmps -= hour.usedAmps;
@@ -144,6 +152,13 @@ export class SolarComponent implements OnInit {
     this.selectedBattery = BatteryTypes[index];
 
     this.doSomething(index);
+  }
+
+  hourToAmPm(hour) {
+    if (hour == 0) return '12AM';
+    else if (hour < 12) return `${hour}AM`;
+    else if (hour == 12) return '12PM';
+    else return `${hour - 12}PM`;
   }
 }
 

@@ -51,8 +51,45 @@ export class MainChartComponent implements OnInit, OnChanges {
     this.updateGraphTimeout = setTimeout(() => {
       console.log('Updating graph.');
 
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Day, Hour'); // Implicit domain column.
+      data.addColumn('number', 'Amps Created'); // Implicit data column.
+      data.addColumn('number', 'Amps Consumed'); // Implicit data column.
+
+      data.addColumn('number', 'Battery Charge Level'); // Implicit data column.
+      data.addColumn({'type': 'string', 'role': 'style'});
+
+      data.addColumn('number', 'Battery Safe Minimum');
+      data.addColumn({type:'boolean', role: 'certainty'});
+
+      data.addColumn('number', 'Battery Warning Minimum');
+      data.addColumn({type:'boolean', role: 'certainty'});
+
+      data.addColumn('number', 'Battery Danger Minimum');
+      data.addColumn({type:'boolean', role: 'certainty'});
+      //data.addColumn({type:'number', role: 'interval'});
+      //data.addColumn('number', 'Expenses');
+
+      data.addRows(this.data);
+
+
+      var formatAhTwoDigits = new google.visualization.NumberFormat({
+        fractionDigits: 2,
+        suffix: 'Ah'
+      });
+      formatAhTwoDigits.format(data, 3);
+
+      var formatAhNoDigits = new google.visualization.NumberFormat({
+        fractionDigits: 0,
+        suffix: 'Ah'
+      });
+      formatAhNoDigits.format(data, 5);
+      formatAhNoDigits.format(data, 7);
+      formatAhNoDigits.format(data, 9);
+
       var chart = new google.visualization.ComboChart(this.containerElement);
-      chart.draw(google.visualization.arrayToDataTable(this.data), {
+      chart.draw(data, {
         height: 300,
         chartArea: {
           top: 7,
@@ -60,8 +97,9 @@ export class MainChartComponent implements OnInit, OnChanges {
           bottom: 40,
           left: 45,
         },
-        //width: '100%',
-        legend: {position: 'bottom'},
+        legend: {
+          position: 'bottom'
+        },
         vAxis: {
           title: 'Amp Hours',
           viewWindowMode: 'explicit',
@@ -73,9 +111,18 @@ export class MainChartComponent implements OnInit, OnChanges {
         hAxis: {
           title: 'Day, Hour',
           ticks: [0, 12, 24, 36, 48, 60, 72],
+          viewWindow: {
+            max: 73,
+            min: -1
+          }
         },
         seriesType: 'bars',
-        series: {2: {type: 'line'}},
+        series: {
+          2: {type: 'line'},
+          3: {type: 'line', visibleInLegend: false},
+          4: {type: 'line', visibleInLegend: false},
+          5: {type: 'line', visibleInLegend: false},
+        },
       });
     }, 100);
   }
