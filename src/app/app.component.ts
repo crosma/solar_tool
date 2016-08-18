@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
 import {Location} from '@angular/common';
 
-declare var ga:Function;
+declare var ga: Function;
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ declare var ga:Function;
 
 })
 export class AppComponent {
-  private currentRoute:string;
+  private currentRoute: string;
 
   constructor(router: Router, location: Location) {
 
@@ -19,7 +19,7 @@ export class AppComponent {
     router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         let newRoute = location.path() || '/';
-        if (this.currentRoute != newRoute) {
+        if (newRoute != this.currentRoute) {
           ga('send', 'pageview', newRoute);
           this.currentRoute = newRoute;
         }

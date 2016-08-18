@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { BasicConsumers } from './consumers-basic';
-import { Battery, BatteryTypes } from './batteries';
-
+import {Component, OnInit} from '@angular/core';
+import {BasicConsumers} from './consumers-basic';
+import {Battery, BatteryTypes} from './batteries';
 
 @Component({
   // moduleId: module.id,
   selector: 'app-solar',
   templateUrl: 'solar.component.html',
-  styleUrls: ['solar.component.css']
+  styleUrls: ['solar.component.css'],
 })
 export class SolarComponent implements OnInit {
   consumers = BasicConsumers;
@@ -33,6 +32,7 @@ export class SolarComponent implements OnInit {
   inverterEfficiency = 90;
 
   hours: GraphPoints = [];
+  chartData = [];
 
   ngOnInit() {
     this.update();
@@ -90,31 +90,49 @@ export class SolarComponent implements OnInit {
       23: 0,
     };
 
+    let currentBatteryAmps = this.batteryAmpHours;
+    this.chartData = [];
+    this.chartData.push(['Day, Hour', 'Amps Created', 'Amps Consumed', 'Battery Charge']);
+
     this.hours = [];
-    for (var h = 0; h < 24; h++) {
-      var hour: GraphPoint = {
-        createdAmps: this.solarWatts / this.solarVolts * solarHours[h],
-        usedAmps: 0,
-      };
+    for (let day = 1; day <= 3; day++) {
+      for (var h = 0; h < 24; h++) {
+        var hour: GraphPoint = {
+          createdAmps: this.solarWatts / this.solarVolts * solarHours[h],
+          usedAmps: 0,
+        };
 
-      let wattsAC = 0;
-      for (let consumer of BasicConsumers) {
-        if (!consumer.getHour(h)) continue;
+        let wattsAC = 0;
+        for (let consumer of BasicConsumers) {
+          if (!consumer.getHour(h)) continue;
 
-        if (consumer.currentAC) {
-          wattsAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
-        } else {
-          hour.usedAmps += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.batteryVoltsDC;// * consumer.getHoursPerDay();
+          if (consumer.currentAC) {
+            wattsAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
+          } else {
+            hour.usedAmps += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.batteryVoltsDC;// * consumer.getHoursPerDay();
+          }
         }
-      }
 
-      hour.usedAmps += wattsAC / this.batteryVoltsDC * (100 / this.inverterEfficiency);
+        hour.usedAmps += wattsAC / this.batteryVoltsDC * (100 / this.inverterEfficiency);
 
-      this.hours.push(hour);
-    } // for h
+        this.hours.push(hour);
+
+        this.chartData.push([
+          {v: (day - 1) * 24 + h, f: `Day ${day}, Hour ${h}`} ,
+          hour.createdAmps,
+          hour.usedAmps,
+          currentBatteryAmps
+        ]);
+
+        currentBatteryAmps -= hour.usedAmps;
+        currentBatteryAmps += hour.createdAmps;
+        currentBatteryAmps = Math.max(Math.min(currentBatteryAmps, this.batteryAmpHours), 0);
+      } // for h
+    } // for day
   }
 
   doSomethingTimeout = null;
+
   doSomething(newValue) {
     this.doSomethingTimeout && clearTimeout(this.doSomethingTimeout);
     this.doSomethingTimeout = setTimeout(() => {

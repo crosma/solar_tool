@@ -10,6 +10,7 @@ import { SolarComponent } from './solar/solar.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
+import { MainChartComponent } from './solar/main-chart/main-chart.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
     AboutComponent,
     PageNotFoundComponent,
     HomeComponent,
+    MainChartComponent,
   ],
   imports: [
     BrowserModule,
