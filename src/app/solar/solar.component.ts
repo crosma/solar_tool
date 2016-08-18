@@ -27,7 +27,7 @@ export class SolarComponent implements OnInit {
   wattHoursDC = 0;
 
   solarVolts = 12;
-  solarWatts = 600;
+  solarWatts = 300;
 
   inverterEfficiency = 90;
 
