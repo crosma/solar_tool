@@ -18,7 +18,10 @@ module.exports = function(defaults) {
       '@angular/**/*.+(js|js.map)',
     ],
     "sassCompiler": {
-      "cacheExclude": [/\/_[^\/]+$/]
+      cacheExclude: [/\/_[^\/]+$/],
+      includePaths: [
+        'src/style'
+      ]
     }
   });
 };

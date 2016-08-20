@@ -13,7 +13,6 @@ const map: any = {
 
 /** User packages configuration. */
 const packages: any = {
-  "/angulartics2": {"defaultExtension": "js"}
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
