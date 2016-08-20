@@ -25,14 +25,25 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
   },
 
   {
-    name: 'Computer - Gaming',
-    details: 'Computers use significantly more power when under loads such as gaming.',
+    name: 'Computer - Laptop',
+    details: 'Meh.',
 
     currentAC: true,
     volts: 110,
     watts: 75,
 
     quantity: 1,
+  },
+
+  {
+    name: 'Computer - Gaming Desktop',
+    details: 'Computers use significantly more power when under loads such as gaming, should probably account for this somehow.',
+
+    currentAC: true,
+    volts: 110,
+    watts: 150,
+
+    quantity: 0,
   },
 
   {
@@ -67,4 +78,3 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
 
 
 export const BasicConsumers = createConsumersFromDefinitions(BasicConsumersDefinitions);
-
