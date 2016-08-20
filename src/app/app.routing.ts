@@ -7,11 +7,12 @@ import { AboutComponent }  from './about/about.component';
 import { PageNotFoundComponent }  from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
+  /*
   {
     path: '',
     component: HomeComponent
   },
-
+  */
   {
     path: 'solar',
     component: SolarComponent
