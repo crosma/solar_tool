@@ -1,10 +1,10 @@
-import { RubbertrampPage } from './app.po';
+import { SolarToolPage } from './app.po';
 
-describe('rubbertramp App', function() {
-  let page: RubbertrampPage;
+describe('solar_tool App', function() {
+  let page: SolarToolPage;
 
   beforeEach(() => {
-    page = new RubbertrampPage();
+    page = new SolarToolPage();
   });
 
   it('should display message saying app works', () => {
