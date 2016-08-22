@@ -6,7 +6,7 @@
 module.exports = function(environment) {
   return {
     environment: environment,
-    baseURL: '/solar_tool/',
+    baseURL: '/',
     locationType: 'auto'
   };
 };
