@@ -20,12 +20,12 @@ export class SolarComponent implements OnInit {
     solarWatts: 300,
 
     inverterEfficiency: 90,
+    inverterOutputVolts: 110,
   };
 
   peakWattsAC = 0;
   peakWattsSurgeAC = 0;
   wattHoursAC = 0;
-  targetVoltsAC = 110;
 
   batteryTypes = BatteryTypes;
   selectedBattery: Battery = BatteryTypes[0];
@@ -33,8 +33,6 @@ export class SolarComponent implements OnInit {
   peakWattsDC = 0;
   peakWattsSurgeDC = 0;
   wattHoursDC = 0;
-
-
 
   hours: GraphPoints = [];
   chartData = [];
@@ -57,11 +55,11 @@ export class SolarComponent implements OnInit {
 
     for (let consumer of BasicConsumers) {
       if (consumer.currentAC) {
-        this.peakWattsAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity;
+        this.peakWattsAC += consumer.volts / this.user_data.inverterOutputVolts * consumer.watts * consumer.quantity;
 
-        this.peakWattsSurgeAC += consumer.volts / this.targetVoltsAC * consumer.wattsSurge * consumer.quantity;
+        this.peakWattsSurgeAC += consumer.volts / this.user_data.inverterOutputVolts * consumer.wattsSurge * consumer.quantity;
 
-        this.wattHoursAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
+        this.wattHoursAC += consumer.volts / this.user_data.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
 
       } else {
         this.peakWattsDC += consumer.volts / this.user_data.batteryVoltsDC * consumer.watts * consumer.quantity;
@@ -114,7 +112,7 @@ export class SolarComponent implements OnInit {
           if (!consumer.getHour(h)) continue;
 
           if (consumer.currentAC) {
-            wattsAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
+            wattsAC += consumer.volts / this.user_data.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
           } else {
             hour.usedAmps += consumer.volts / this.user_data.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.user_data.batteryVoltsDC;// * consumer.getHoursPerDay();
           }
