@@ -52,7 +52,7 @@ declare var System: any;
 
 // Apply the CLI SystemJS configuration.
 System.config({
-  baseUrl: '/solar_tool/',
+  baseUrl: './',
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
