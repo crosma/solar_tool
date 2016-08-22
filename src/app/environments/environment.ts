@@ -4,6 +4,5 @@
 // The build system defaults to the dev environment.
 
 export const environment = {
-  production: false,
-  baseUrl: './',
+  production: false
 };
