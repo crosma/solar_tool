@@ -1,3 +1,4 @@
+/*
 import 'core-js/es6';
 import 'core-js/es7/reflect';
 
@@ -35,3 +36,4 @@ Promise.all([
   .then(context => context.keys().map(context))
   // Finally, start Karma to run the tests.
   .then(__karma__.start, __karma__.error);
+*/
