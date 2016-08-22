@@ -1356,7 +1356,7 @@ exports.escapeRegExp = escapeRegExp;
 "use strict";
 var root_1 = __webpack_require__(51);
 var observable_1 = __webpack_require__(232);
-var toSubscriber_1 = __webpack_require__(581);
+var toSubscriber_1 = __webpack_require__(582);
 /**
  * A representation of any set of values over any amount of time. This the most basic building block
  * of RxJS.
@@ -6155,7 +6155,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var isFunction_1 = __webpack_require__(156);
 var Subscription_1 = __webpack_require__(152);
 var rxSubscriber_1 = __webpack_require__(233);
-var Observer_1 = __webpack_require__(550);
+var Observer_1 = __webpack_require__(551);
 /**
  * Implements the {@link Observer} interface and extends the
  * {@link Subscription} class. While the {@link Observer} is the public API for
@@ -7218,7 +7218,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Observable_1 = __webpack_require__(6);
 var Subscriber_1 = __webpack_require__(31);
 var Subscription_1 = __webpack_require__(152);
-var SubjectSubscription_1 = __webpack_require__(551);
+var SubjectSubscription_1 = __webpack_require__(552);
 var rxSubscriber_1 = __webpack_require__(233);
 var throwError_1 = __webpack_require__(369);
 var ObjectUnsubscribedError_1 = __webpack_require__(365);
@@ -8074,7 +8074,7 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
     exports.root = freeGlobal;
 }
 //# sourceMappingURL=root.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(718)(module), __webpack_require__(77)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(719)(module), __webpack_require__(77)))
 
 /***/ },
 /* 52 */,
@@ -8857,7 +8857,7 @@ var UrlParser = (function () {
  */
 "use strict";
 __webpack_require__(359);
-__webpack_require__(556);
+__webpack_require__(557);
 var Observable_1 = __webpack_require__(6);
 var fromPromise_1 = __webpack_require__(228);
 var of_1 = __webpack_require__(154);
@@ -12604,10 +12604,10 @@ exports.ReceivedMessage = ReceivedMessage;
  */
 "use strict";
 __webpack_require__(360);
-__webpack_require__(558);
-__webpack_require__(557);
 __webpack_require__(559);
-__webpack_require__(554);
+__webpack_require__(558);
+__webpack_require__(560);
+__webpack_require__(555);
 var core_1 = __webpack_require__(0);
 var Subject_1 = __webpack_require__(43);
 var from_1 = __webpack_require__(363);
@@ -20732,7 +20732,7 @@ var isObject_1 = __webpack_require__(366);
 var isFunction_1 = __webpack_require__(156);
 var tryCatch_1 = __webpack_require__(370);
 var errorObject_1 = __webpack_require__(235);
-var UnsubscriptionError_1 = __webpack_require__(580);
+var UnsubscriptionError_1 = __webpack_require__(581);
 /**
  * Represents a disposable resource, such as the execution of an Observable. A
  * Subscription has one important method, `unsubscribe`, that takes no argument
@@ -31060,7 +31060,7 @@ var isPromise_1 = __webpack_require__(367);
 var Observable_1 = __webpack_require__(6);
 var iterator_1 = __webpack_require__(231);
 var observable_1 = __webpack_require__(232);
-var InnerSubscriber_1 = __webpack_require__(548);
+var InnerSubscriber_1 = __webpack_require__(549);
 function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
     var destination = new InnerSubscriber_1.InnerSubscriber(outerSubscriber, outerValue, outerIndex);
     if (destination.isUnsubscribed) {
@@ -46252,8 +46252,8 @@ var AboutComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             //moduleId: module.id,
             selector: 'app-about',
-            template: __webpack_require__(543),
-            styles: [__webpack_require__(541)]
+            template: __webpack_require__(544),
+            styles: [__webpack_require__(542)]
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);
@@ -46305,8 +46305,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(544),
-            styles: [__webpack_require__(538)],
+            template: __webpack_require__(545),
+            styles: [__webpack_require__(539)],
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _b) || Object])
     ], AppComponent);
@@ -46375,8 +46375,8 @@ var PageNotFoundComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             //moduleId: module.id,
             selector: 'app-page-not-found',
-            template: __webpack_require__(545),
-            styles: [__webpack_require__(542)]
+            template: __webpack_require__(546),
+            styles: [__webpack_require__(543)]
         }), 
         __metadata('design:paramtypes', [])
     ], PageNotFoundComponent);
@@ -46392,8 +46392,8 @@ var PageNotFoundComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __WEBPACK_IMPORTED_MODULE_0__angular_core__ && __WEBPACK_IMPORTED_MODULE_0__angular_core__.__esModule ? function() { return __WEBPACK_IMPORTED_MODULE_0__angular_core__['default'] } : function() { return __WEBPACK_IMPORTED_MODULE_0__angular_core__; };
 /* harmony import */ __webpack_require__.d(__WEBPACK_IMPORTED_MODULE_0__angular_core___default, 'a', __WEBPACK_IMPORTED_MODULE_0__angular_core___default);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__consumers_basic__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__batteries__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__consumers_basic__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__batteries__ = __webpack_require__(535);
 
 /* harmony export */ __webpack_require__.d(exports, "a", function() { return SolarComponent; });var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -46416,6 +46416,7 @@ var SolarComponent = (function () {
             selectedBatteryIndex: 0,
             solarVolts: 12,
             solarWatts: 300,
+            inverterEfficiency: 90,
         };
         this.peakWattsAC = 0;
         this.peakWattsSurgeAC = 0;
@@ -46426,7 +46427,6 @@ var SolarComponent = (function () {
         this.peakWattsDC = 0;
         this.peakWattsSurgeDC = 0;
         this.wattHoursDC = 0;
-        this.inverterEfficiency = 90;
         this.hours = [];
         this.chartData = [];
         this.doSomethingTimeout = null;
@@ -46502,7 +46502,7 @@ var SolarComponent = (function () {
                         hour.usedAmps += consumer.volts / this.user_data.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.user_data.batteryVoltsDC; // * consumer.getHoursPerDay();
                     }
                 }
-                hour.usedAmps += wattsAC / this.user_data.batteryVoltsDC * (100 / this.inverterEfficiency);
+                hour.usedAmps += wattsAC / this.user_data.batteryVoltsDC * (100 / this.user_data.inverterEfficiency);
                 this.hours.push(hour);
                 //todo pass the hours array to the chart, build chartData in chart code
                 this.chartData.push([
@@ -46558,9 +46558,9 @@ var SolarComponent = (function () {
         if (window.localStorage) {
             try {
                 var saved_data = JSON.parse(window.localStorage['user_data']);
-                Object.keys(saved_data).forEach(function (val, key) {
+                Object.keys(saved_data).forEach(function (key) {
                     if (_this.user_data[key])
-                        _this.user_data[key] = val;
+                        _this.user_data[key] = saved_data[key];
                 });
                 this.selectedBattery = __WEBPACK_IMPORTED_MODULE_2__batteries__["a" /* BatteryTypes */][this.user_data.selectedBatteryIndex];
             }
@@ -46573,8 +46573,8 @@ var SolarComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             // moduleId: module.id,
             selector: 'app-solar',
-            template: __webpack_require__(547),
-            styles: [__webpack_require__(540)],
+            template: __webpack_require__(548),
+            styles: [__webpack_require__(541)],
         }), 
         __metadata('design:paramtypes', [])
     ], SolarComponent);
@@ -46649,7 +46649,7 @@ exports.BehaviorSubject = BehaviorSubject;
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var concatAll_1 = __webpack_require__(567);
+var concatAll_1 = __webpack_require__(568);
 Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
 //# sourceMappingURL=concatAll.js.map
 
@@ -46660,7 +46660,7 @@ Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var map_1 = __webpack_require__(572);
+var map_1 = __webpack_require__(573);
 Observable_1.Observable.prototype.map = map_1.map;
 //# sourceMappingURL=map.js.map
 
@@ -46859,7 +46859,7 @@ exports.ScalarObservable = ScalarObservable;
 
 "use strict";
 "use strict";
-var FromObservable_1 = __webpack_require__(563);
+var FromObservable_1 = __webpack_require__(564);
 exports.from = FromObservable_1.FromObservable.create;
 //# sourceMappingURL=from.js.map
 
@@ -47130,7 +47130,7 @@ exports.tryCatch = tryCatch;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core___default = __WEBPACK_IMPORTED_MODULE_1__angular_core__ && __WEBPACK_IMPORTED_MODULE_1__angular_core__.__esModule ? function() { return __WEBPACK_IMPORTED_MODULE_1__angular_core__['default'] } : function() { return __WEBPACK_IMPORTED_MODULE_1__angular_core__; };
 /* harmony import */ __webpack_require__.d(__WEBPACK_IMPORTED_MODULE_1__angular_core___default, 'a', __WEBPACK_IMPORTED_MODULE_1__angular_core___default);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app___ = __webpack_require__(533);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app___ = __webpack_require__(534);
 
 
 
@@ -58634,8 +58634,8 @@ function _resolveDefaultAnimationDriver() {
  * found in the LICENSE file at https://angular.io/license
  */
 "use strict";
-__webpack_require__(555);
-__webpack_require__(552);
+__webpack_require__(556);
+__webpack_require__(553);
 __webpack_require__(359);
 var Observable_1 = __webpack_require__(6);
 var from_1 = __webpack_require__(363);
@@ -59696,8 +59696,8 @@ function getResolve(route) {
  */
 "use strict";
 __webpack_require__(360);
-__webpack_require__(560);
-var forkJoin_1 = __webpack_require__(565);
+__webpack_require__(561);
+var forkJoin_1 = __webpack_require__(566);
 var fromPromise_1 = __webpack_require__(228);
 function resolve(resolver, state) {
     return resolveNode(resolver, state._root).map(function (_) { return state; });
@@ -59881,7 +59881,8 @@ exports.provideRouter = provideRouter;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__solar_solar_component__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__about_about_component__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__page_not_found_page_not_found_component__ = __webpack_require__(356);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__solar_main_chart_main_chart_component__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__solar_main_chart_main_chart_component__ = __webpack_require__(538);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_bootstrap_tab_directive__ = __webpack_require__(533);
 
 /* harmony export */ __webpack_require__.d(exports, "AppModule", function() { return AppModule; });var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -59892,6 +59893,7 @@ exports.provideRouter = provideRouter;
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -59913,6 +59915,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_7__about_about_component__["a" /* AboutComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__solar_main_chart_main_chart_component__["a" /* MainChartComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__directives_bootstrap_tab_directive__["a" /* BootstrapTab */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -59937,7 +59940,51 @@ var AppModule = (function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environments_environment__ = __webpack_require__(719);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __WEBPACK_IMPORTED_MODULE_0__angular_core__ && __WEBPACK_IMPORTED_MODULE_0__angular_core__.__esModule ? function() { return __WEBPACK_IMPORTED_MODULE_0__angular_core__['default'] } : function() { return __WEBPACK_IMPORTED_MODULE_0__angular_core__; };
+/* harmony import */ __webpack_require__.d(__WEBPACK_IMPORTED_MODULE_0__angular_core___default, 'a', __WEBPACK_IMPORTED_MODULE_0__angular_core___default);
+
+/* harmony export */ __webpack_require__.d(exports, "a", function() { return BootstrapTab; });var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var BootstrapTab = (function () {
+    function BootstrapTab(el) {
+        this.el = el.nativeElement;
+    }
+    BootstrapTab.prototype.onClick = function (event) {
+        event.preventDefault();
+        $(this.el).tab('show');
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('click', ['$event']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], BootstrapTab.prototype, "onClick", null);
+    BootstrapTab = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"])({
+            selector: '[bootstrapTab]',
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _a) || Object])
+    ], BootstrapTab);
+    return BootstrapTab;
+    var _a;
+}());
+
+
+/***/ },
+/* 534 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environments_environment__ = __webpack_require__(720);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_module__ = __webpack_require__(532);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_routing__ = __webpack_require__(355);
@@ -59952,7 +59999,7 @@ var AppModule = (function () {
 
 
 /***/ },
-/* 534 */
+/* 535 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59976,7 +60023,7 @@ var BatteryTypes = [
 
 
 /***/ },
-/* 535 */
+/* 536 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60032,11 +60079,11 @@ function createConsumersFromDefinitions(defs) {
 
 
 /***/ },
-/* 536 */
+/* 537 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__consumer__ = __webpack_require__(535);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__consumer__ = __webpack_require__(536);
 
 /* harmony export */ __webpack_require__.d(exports, "a", function() { return BasicConsumers; });
 var BasicConsumersDefinitions = [
@@ -60103,14 +60150,14 @@ var BasicConsumers = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__consumer
 
 
 /***/ },
-/* 537 */
+/* 538 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __WEBPACK_IMPORTED_MODULE_0__angular_core__ && __WEBPACK_IMPORTED_MODULE_0__angular_core__.__esModule ? function() { return __WEBPACK_IMPORTED_MODULE_0__angular_core__['default'] } : function() { return __WEBPACK_IMPORTED_MODULE_0__angular_core__; };
 /* harmony import */ __webpack_require__.d(__WEBPACK_IMPORTED_MODULE_0__angular_core___default, 'a', __WEBPACK_IMPORTED_MODULE_0__angular_core___default);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime__ = __webpack_require__(553);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime__ = __webpack_require__(554);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime___default = __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime__ && __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime__.__esModule ? function() { return __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime__['default'] } : function() { return __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime__; };
 /* harmony import */ __webpack_require__.d(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime___default, 'a', __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_debounceTime___default);
 
@@ -60137,13 +60184,11 @@ var MainChartComponent = (function () {
         this.myElement = myElement;
     }
     MainChartComponent.prototype.ngOnInit = function () {
-        console.log('ngOnInit');
         var div = this.myElement.nativeElement.getElementsByTagName("div");
         this.containerElement = div[0];
         this.updateGraph();
     };
     MainChartComponent.prototype.ngOnChanges = function () {
-        console.log('ngOnChanges');
         this.updateGraph();
     };
     MainChartComponent.prototype.chartOnLoad = function () {
@@ -60156,7 +60201,6 @@ var MainChartComponent = (function () {
             return;
         this.updateGraphTimeout && clearTimeout(this.updateGraphTimeout);
         this.updateGraphTimeout = setTimeout(function () {
-            console.log('Updating graph.');
             var data = new google.visualization.DataTable();
             data.addColumn('number', 'Day, Hour'); // Implicit domain column.
             data.addColumn('number', 'Amps Created'); // Implicit user_data column.
@@ -60233,8 +60277,8 @@ var MainChartComponent = (function () {
     MainChartComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-main-chart',
-            template: __webpack_require__(546),
-            styles: [__webpack_require__(539)]
+            template: __webpack_require__(547),
+            styles: [__webpack_require__(540)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _a) || Object])
     ], MainChartComponent);
@@ -60244,28 +60288,22 @@ var MainChartComponent = (function () {
 
 
 /***/ },
-/* 538 */
+/* 539 */
 /***/ function(module, exports) {
 
 module.exports = "body {\n  min-height: 2000px; }\n\n.navbar-static-top {\n  margin-bottom: 19px; }\n  .navbar-static-top a.active {\n    background-color: #e7e7e7; }\n"
 
 /***/ },
-/* 539 */
-/***/ function(module, exports) {
-
-module.exports = "div {\n  display: block;\n  width: 100%;\n  height: 300px;\n  background: #e7e7e7; }\n"
-
-/***/ },
 /* 540 */
 /***/ function(module, exports) {
 
-module.exports = ".row-chart {\n  margin-bottom: 15px; }\n"
+module.exports = "div {\n  display: block;\n  width: 100%;\n  height: 300px;\n  background: #f3f3f3; }\n"
 
 /***/ },
 /* 541 */
 /***/ function(module, exports) {
 
-module.exports = ""
+module.exports = ".row-chart {\n  margin-bottom: 15px; }\n"
 
 /***/ },
 /* 542 */
@@ -60277,34 +60315,40 @@ module.exports = ""
 /* 543 */
 /***/ function(module, exports) {
 
-module.exports = "<p>\r\n  This page aims to be a calculator to visualize power generation, storage and consumption for solar power systems.\r\n</p>\r\n"
+module.exports = ""
 
 /***/ },
 /* 544 */
 /***/ function(module, exports) {
 
-module.exports = "<!-- Static navbar -->\n<nav class=\"navbar navbar-default navbar-static-top\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a routerLink=\"/\" class=\"navbar-brand\">Solar Tool</a>\n    </div>\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a routerLink=\"/todo\" routerLinkActive=\"active\">Todo List</a></li>\n        <li><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n        <!--\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" user_data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li class=\"dropdown-header\">Nav header</li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li><a href=\"#\">One more separated link</a></li>\n          </ul>\n        </li>\n        -->\n      </ul>\n\n    </div><!--/.nav-collapse -->\n  </div>\n</nav>\n\n\n<div class=\"container\">\n  <router-outlet></router-outlet>\n</div> <!-- /container -->\n\n\n"
+module.exports = "<p>\r\n  This page aims to be a calculator to visualize power generation, storage and consumption for solar power systems.\r\n</p>\r\n"
 
 /***/ },
 /* 545 */
 /***/ function(module, exports) {
 
-module.exports = "<p>\r\n  Page not found. Huh.\r\n</p>\r\n"
+module.exports = "<!-- Static navbar -->\n<nav class=\"navbar navbar-default navbar-static-top\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a routerLink=\"/\" class=\"navbar-brand\">Solar Tool</a>\n    </div>\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n        <!--\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" user_data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li class=\"dropdown-header\">Nav header</li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li><a href=\"#\">One more separated link</a></li>\n          </ul>\n        </li>\n        -->\n      </ul>\n\n    </div><!--/.nav-collapse -->\n  </div>\n</nav>\n\n\n<div class=\"container\">\n  <router-outlet></router-outlet>\n</div> <!-- /container -->\n\n\n"
 
 /***/ },
 /* 546 */
 /***/ function(module, exports) {
 
-module.exports = "<div></div>\r\n"
+module.exports = "<p>\r\n  Page not found. Huh.\r\n</p>\r\n"
 
 /***/ },
 /* 547 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"row row-chart\">\n  <div class=\"col-md-12\">\n    <app-main-chart [data]=\"chartData\" [batteryAmpHours]=\"batteryAmpHours\"></app-main-chart>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-6\">\n\n    <table class=\"table table-striped table-bordered table-condensed table-hover\">\n    <caption>\n      <h4>Power Consumers</h4>\n      <small>Need a better list of consumers. Ideas and data welcome.</small>\n    </caption>\n    <thead>\n      <tr>\n        <th>#</th>\n        <th>Consumer</th>\n        <th>Watts</th>\n        <th>Volts</th>\n        <th>Amps</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let consumer of consumers\">\n        <td style=\"width: 80px;\">\n          <input type=\"number\" maxlength=\"2\" min=\"0\" class=\"form-control\" [(ngModel)]=\"consumer.quantity\" (ngModelChange)=\"doSomething($event)\">\n        </td>\n        <td>\n          <div>{{ consumer.name }}</div>\n          <small *ngIf=\"consumer.url\"><a href=\"{{ consumer.url }}\" target=\"_blank\">Details...</a></small>\n          <small *ngIf=\"consumer.amazon_asin\">\n            <a href=\"https://www.amazon.com/gp/product/{{ consumer.amazon_asin }}/\" target=\"_blank\">Amazon...</a>\n          </small>\n        </td>\n        <td>{{ consumer.watts | number:'1.1-1' }}</td>\n        <td>{{ consumer.volts | number:'1.1-1' }}</td>\n        <td>{{ consumer.amps | number:'1.1-1' }}</td>\n      </tr>\n    </tbody>\n    </table>\n  </div>\n\n  <div class=\"col-md-6\">\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption><h4>Battery Bank</h4>\n      <small>Only AGMs have correct minimum battery level data.</small>\n    </caption>\n    <tbody>\n      <tr>\n        <th style=\"vertical-align: middle;\">Voltage</th>\n        <td style=\"width: 250px;\">\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"user_data.batteryVoltsDC\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">V DC</div>\n          </div>\n        </td>\n      </tr>\n      <tr>\n        <th style=\"vertical-align: middle;\">Amp Hours</th>\n        <td>\n          <div class=\"input-group\">\n            <input type=\"number\" step=\"100\" class=\"form-control\" [(ngModel)]=\"user_data.batteryAmpHours\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">Ah</div>\n          </div>\n        </td>\n      </tr>\n      <tr>\n        <th style=\"vertical-align: middle;\">Battery Type</th>\n        <td>\n          <select [(ngModel)]=\"user_data.selectedBatteryIndex\" class=\"form-control\" (ngModelChange)=\"updateSelectedBattery($event)\">\n            <option *ngFor=\"let battery of batteryTypes; let i = index\" [value]=\"i\">\n              {{ battery.name }}\n            </option>\n          </select>\n        </td>\n      </tr>\n    </tbody>\n    </table>\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption>\n      <h4>Solar</h4>\n      <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>\n    </caption>\n    <tbody>\n      <tr>\n        <th style=\"vertical-align: middle;\">Voltage</th>\n        <td style=\"width: 155px;\">\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"solarVolts\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">V DC</div>\n          </div>\n        </td>\n      </tr>\n      <tr>\n        <th style=\"vertical-align: middle;\">Watts</th>\n        <td>\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"0\" step=\"100\" class=\"form-control\" [(ngModel)]=\"solarWatts\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">W</div>\n          </div>\n        </td>\n      </tr>\n    </tbody>\n    </table>\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption><h4>Inverter</h4></caption>\n    <tbody>\n      <tr>\n        <th style=\"vertical-align: middle;\">Efficiency</th>\n        <td style=\"width: 155px;\">\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"1\" max=\"100\" class=\"form-control\" [(ngModel)]=\"inverterEfficiency\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">%</div>\n          </div>\n        </td>\n      </tr>\n    </tbody>\n    </table>\n\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption>{{ targetVoltsAC }}V AC Needs</caption>\n    <tbody>\n      <tr>\n        <th>Peak Watts Required</th>\n        <td>{{ peakWattsAC | number:'1.1-1' }}W</td>\n      </tr>\n      <tr>\n        <th>Peak Amps Required</th>\n        <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>\n      </tr>\n\n      <tr>\n        <th>Peak Surge Watts Required</th>\n        <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>\n      </tr>\n      <tr>\n        <th>Peak Surge Amps Required</th>\n        <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>\n      </tr>\n    </tbody>\n    </table>\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption>{{ batteryVoltsDC }}V DC Needs</caption>\n    <tbody>\n      <tr>\n        <th>Peak Watts Required By DC Consumers</th>\n        <td>{{ peakWattsDC | number:'1.1-1' }}W</td>\n      </tr>\n      <tr>\n        <th>Peak Amps Required By DC Consumers</th>\n        <td>{{ peakWattsDC / batteryVoltsDC | number:'1.1-1' }}A</td>\n      </tr>\n      <tr>\n        <th>Amp Hours Consumed By DC Consumers</th>\n        <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>\n      </tr>\n\n      <tr>\n        <th>Peak Amps Used By Inverter</th>\n        <td>{{ peakWattsAC / 12 * (100 / inverterEfficiency) | number:'1.1-1' }}A</td>\n      </tr>\n\n      <tr>\n        <th>Amp Hours Consumed By Inverter</th>\n        <td>{{ wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency) | number:'1.1-1' }}Ah</td>\n      </tr>\n\n      <tr>\n        <th>Total Amp Hours Consumed</th>\n        <td>{{ (wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>\n      </tr>\n    </tbody>\n    </table>\n\n  </div>\n</div>\n"
+module.exports = "<div></div>\r\n"
 
 /***/ },
 /* 548 */
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"row row-chart\">\n  <div class=\"col-md-12\">\n    <app-main-chart [data]=\"chartData\" [batteryAmpHours]=\"batteryAmpHours\"></app-main-chart>\n  </div>\n</div>\n\n\n<ul bootstrapTabs class=\"nav nav-tabs\" role=\"tablist\">\n  <li role=\"presentation\" class=\"active\">\n    <a bootstrapTab=\"tab_group\" href=\"#consumers\" aria-controls=\"consumers\" role=\"tab\" data-toggle=\"consumers\">Consumers</a>\n  </li>\n  <li role=\"presentation\">\n    <a bootstrapTab=\"tab_group\" href=\"#options\" aria-controls=\"options\" role=\"tab\" data-toggle=\"options\">Options</a>\n  </li>\n  <li role=\"presentation\">\n    <a bootstrapTab=\"tab_group\" href=\"#data\" aria-controls=\"data\" role=\"tab\" data-toggle=\"data\">Data</a></li>\n</ul>\n\n<div class=\"tab-content\" id=\"tab_group\">\n  <div role=\"tabpanel\" class=\"tab-pane active\" id=\"consumers\">\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n\n        <table class=\"table table-striped table-bordered table-condensed table-hover\">\n        <caption>\n          <h4>Power Consumers</h4>\n          <small>Need a better list of consumers. Ideas and data welcome.</small>\n        </caption>\n        <thead>\n          <tr>\n            <th>#</th>\n            <th>Consumer</th>\n            <th>Watts</th>\n            <th>Volts</th>\n            <th>Amps</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let consumer of consumers\">\n            <td style=\"width: 80px;\">\n              <input type=\"number\" maxlength=\"2\" min=\"0\" class=\"form-control\" [(ngModel)]=\"consumer.quantity\" (ngModelChange)=\"doSomething($event)\">\n            </td>\n            <td>\n              <div>{{ consumer.name }}</div>\n              <small *ngIf=\"consumer.url\"><a href=\"{{ consumer.url }}\" target=\"_blank\">Details...</a></small>\n              <small *ngIf=\"consumer.amazon_asin\">\n                <a href=\"https://www.amazon.com/gp/product/{{ consumer.amazon_asin }}/\" target=\"_blank\">Amazon...</a>\n              </small>\n            </td>\n            <td>{{ consumer.watts | number:'1.1-1' }}</td>\n            <td>{{ consumer.volts | number:'1.1-1' }}</td>\n            <td>{{ consumer.amps | number:'1.1-1' }}</td>\n          </tr>\n        </tbody>\n        </table>\n      </div>\n\n      <div class=\"col-md-6\">\n\n\n      </div>\n    </div><!-- /.row -->\n\n  </div><!-- /.tabpanel -->\n\n  <div role=\"tabpanel\" class=\"tab-pane\" id=\"options\">\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n\n        <table class=\"table table-striped table-bordered table-condensed\">\n        <caption><h4>Battery Bank</h4>\n          <small>Only AGMs have correct minimum battery level data.</small>\n        </caption>\n        <tbody>\n          <tr>\n            <th style=\"vertical-align: middle;\">Voltage</th>\n            <td style=\"width: 250px;\">\n              <div class=\"input-group\">\n                <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"user_data.batteryVoltsDC\" (ngModelChange)=\"doSomething($event)\">\n                <div class=\"input-group-addon\">V DC</div>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <th style=\"vertical-align: middle;\">Amp Hours</th>\n            <td>\n              <div class=\"input-group\">\n                <input type=\"number\" step=\"100\" class=\"form-control\" [(ngModel)]=\"user_data.batteryAmpHours\" (ngModelChange)=\"doSomething($event)\">\n                <div class=\"input-group-addon\">Ah</div>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <th style=\"vertical-align: middle;\">Battery Type</th>\n            <td>\n              <select [(ngModel)]=\"user_data.selectedBatteryIndex\" class=\"form-control\" (ngModelChange)=\"updateSelectedBattery($event)\">\n                <option *ngFor=\"let battery of batteryTypes; let i = index\" [value]=\"i\">\n                  {{ battery.name }}\n                </option>\n              </select>\n            </td>\n          </tr>\n        </tbody>\n        </table>\n\n        <table class=\"table table-striped table-bordered table-condensed\">\n        <caption>\n          <h4>Solar</h4>\n          <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>\n        </caption>\n        <tbody>\n          <tr>\n            <th style=\"vertical-align: middle;\">Voltage</th>\n            <td style=\"width: 155px;\">\n              <div class=\"input-group\">\n                <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"user_data.solarVolts\" (ngModelChange)=\"doSomething($event)\">\n                <div class=\"input-group-addon\">V DC</div>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <th style=\"vertical-align: middle;\">Watts</th>\n            <td>\n              <div class=\"input-group\">\n                <input type=\"number\" min=\"0\" step=\"100\" class=\"form-control\" [(ngModel)]=\"user_data.solarWatts\" (ngModelChange)=\"doSomething($event)\">\n                <div class=\"input-group-addon\">W</div>\n              </div>\n            </td>\n          </tr>\n        </tbody>\n        </table>\n\n        <table class=\"table table-striped table-bordered table-condensed\">\n        <caption><h4>Inverter</h4></caption>\n        <tbody>\n          <tr>\n            <th style=\"vertical-align: middle;\">Efficiency</th>\n            <td style=\"width: 155px;\">\n              <div class=\"input-group\">\n                <input type=\"number\" min=\"1\" max=\"100\" class=\"form-control\" [(ngModel)]=\"user_data.inverterEfficiency\" (ngModelChange)=\"doSomething($event)\">\n                <div class=\"input-group-addon\">%</div>\n              </div>\n            </td>\n          </tr>\n        </tbody>\n        </table>\n\n\n        <table class=\"table table-striped table-bordered table-condensed\">\n        <caption>{{ targetVoltsAC }}V AC Needs</caption>\n        <tbody>\n          <tr>\n            <th>Peak Watts Required</th>\n            <td>{{ peakWattsAC | number:'1.1-1' }}W</td>\n          </tr>\n          <tr>\n            <th>Peak Amps Required</th>\n            <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>\n          </tr>\n\n          <tr>\n            <th>Peak Surge Watts Required</th>\n            <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>\n          </tr>\n          <tr>\n            <th>Peak Surge Amps Required</th>\n            <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>\n          </tr>\n        </tbody>\n        </table>\n\n      </div>\n    </div>\n  </div><!-- /.tabpanel -->\n\n  <div role=\"tabpanel\" class=\"tab-pane\" id=\"data\">\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n\n        <table class=\"table table-striped table-bordered table-condensed\">\n        <caption>{{ batteryVoltsDC }}V DC Needs</caption>\n        <tbody>\n          <tr>\n            <th>Peak Watts Required By DC Consumers</th>\n            <td>{{ peakWattsDC | number:'1.1-1' }}W</td>\n          </tr>\n          <tr>\n            <th>Peak Amps Required By DC Consumers</th>\n            <td>{{ peakWattsDC / user_data.batteryVoltsDC | number:'1.1-1' }}A</td>\n          </tr>\n          <tr>\n            <th>Amp Hours Consumed By DC Consumers</th>\n            <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>\n          </tr>\n\n          <tr>\n            <th>Peak Amps Used By Inverter</th>\n            <td>{{ peakWattsAC / 12 * (100 / user_data.inverterEfficiency) | number:'1.1-1' }}A</td>\n          </tr>\n\n          <tr>\n            <th>Amp Hours Consumed By Inverter</th>\n            <td>{{ wattHoursAC / user_data.batteryVoltsDC * (100 / user_data.inverterEfficiency) | number:'1.1-1' }}Ah</td>\n          </tr>\n\n          <tr>\n            <th>Total Amp Hours Consumed</th>\n            <td>{{ (wattHoursAC / user_data.batteryVoltsDC * (100 / user_data.inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>\n          </tr>\n        </tbody>\n        </table>\n\n      </div>\n    </div>\n\n  </div><!-- /.tabpanel -->\n</div><!-- /.tab-content -->\n"
+
+/***/ },
+/* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60346,7 +60390,7 @@ exports.InnerSubscriber = InnerSubscriber;
 //# sourceMappingURL=InnerSubscriber.js.map
 
 /***/ },
-/* 549 */
+/* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60478,7 +60522,7 @@ exports.Notification = Notification;
 //# sourceMappingURL=Notification.js.map
 
 /***/ },
-/* 550 */
+/* 551 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -60492,7 +60536,7 @@ exports.empty = {
 //# sourceMappingURL=Observer.js.map
 
 /***/ },
-/* 551 */
+/* 552 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60538,26 +60582,15 @@ exports.SubjectSubscription = SubjectSubscription;
 //# sourceMappingURL=SubjectSubscription.js.map
 
 /***/ },
-/* 552 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var Observable_1 = __webpack_require__(6);
-var catch_1 = __webpack_require__(566);
-Observable_1.Observable.prototype.catch = catch_1._catch;
-//# sourceMappingURL=catch.js.map
-
-/***/ },
 /* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var debounceTime_1 = __webpack_require__(568);
-Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
-//# sourceMappingURL=debounceTime.js.map
+var catch_1 = __webpack_require__(567);
+Observable_1.Observable.prototype.catch = catch_1._catch;
+//# sourceMappingURL=catch.js.map
 
 /***/ },
 /* 554 */
@@ -60566,9 +60599,9 @@ Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var every_1 = __webpack_require__(569);
-Observable_1.Observable.prototype.every = every_1.every;
-//# sourceMappingURL=every.js.map
+var debounceTime_1 = __webpack_require__(569);
+Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
+//# sourceMappingURL=debounceTime.js.map
 
 /***/ },
 /* 555 */
@@ -60577,9 +60610,9 @@ Observable_1.Observable.prototype.every = every_1.every;
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var first_1 = __webpack_require__(570);
-Observable_1.Observable.prototype.first = first_1.first;
-//# sourceMappingURL=first.js.map
+var every_1 = __webpack_require__(570);
+Observable_1.Observable.prototype.every = every_1.every;
+//# sourceMappingURL=every.js.map
 
 /***/ },
 /* 556 */
@@ -60588,12 +60621,23 @@ Observable_1.Observable.prototype.first = first_1.first;
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var last_1 = __webpack_require__(571);
+var first_1 = __webpack_require__(571);
+Observable_1.Observable.prototype.first = first_1.first;
+//# sourceMappingURL=first.js.map
+
+/***/ },
+/* 557 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var Observable_1 = __webpack_require__(6);
+var last_1 = __webpack_require__(572);
 Observable_1.Observable.prototype.last = last_1.last;
 //# sourceMappingURL=last.js.map
 
 /***/ },
-/* 557 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60604,30 +60648,30 @@ Observable_1.Observable.prototype.mergeAll = mergeAll_1.mergeAll;
 //# sourceMappingURL=mergeAll.js.map
 
 /***/ },
-/* 558 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var Observable_1 = __webpack_require__(6);
-var mergeMap_1 = __webpack_require__(573);
-Observable_1.Observable.prototype.mergeMap = mergeMap_1.mergeMap;
-Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
-//# sourceMappingURL=mergeMap.js.map
-
-/***/ },
 /* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var Observable_1 = __webpack_require__(6);
-var reduce_1 = __webpack_require__(575);
+var mergeMap_1 = __webpack_require__(574);
+Observable_1.Observable.prototype.mergeMap = mergeMap_1.mergeMap;
+Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
+//# sourceMappingURL=mergeMap.js.map
+
+/***/ },
+/* 560 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var Observable_1 = __webpack_require__(6);
+var reduce_1 = __webpack_require__(576);
 Observable_1.Observable.prototype.reduce = reduce_1.reduce;
 //# sourceMappingURL=reduce.js.map
 
 /***/ },
-/* 560 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60638,7 +60682,7 @@ Observable_1.Observable.prototype.toPromise = toPromise_1.toPromise;
 //# sourceMappingURL=toPromise.js.map
 
 /***/ },
-/* 561 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60719,7 +60763,7 @@ exports.ArrayLikeObservable = ArrayLikeObservable;
 //# sourceMappingURL=ArrayLikeObservable.js.map
 
 /***/ },
-/* 562 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60836,7 +60880,7 @@ var ForkJoinSubscriber = (function (_super) {
 //# sourceMappingURL=ForkJoinObservable.js.map
 
 /***/ },
-/* 563 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60851,13 +60895,13 @@ var isFunction_1 = __webpack_require__(156);
 var isPromise_1 = __webpack_require__(367);
 var isScheduler_1 = __webpack_require__(368);
 var PromiseObservable_1 = __webpack_require__(153);
-var IteratorObservable_1 = __webpack_require__(564);
+var IteratorObservable_1 = __webpack_require__(565);
 var ArrayObservable_1 = __webpack_require__(361);
-var ArrayLikeObservable_1 = __webpack_require__(561);
+var ArrayLikeObservable_1 = __webpack_require__(562);
 var observable_1 = __webpack_require__(232);
 var iterator_1 = __webpack_require__(231);
 var Observable_1 = __webpack_require__(6);
-var observeOn_1 = __webpack_require__(574);
+var observeOn_1 = __webpack_require__(575);
 var isArrayLike = (function (x) { return x && typeof x.length === 'number'; });
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -60919,7 +60963,7 @@ exports.FromObservable = FromObservable;
 //# sourceMappingURL=FromObservable.js.map
 
 /***/ },
-/* 564 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61118,17 +61162,17 @@ function sign(value) {
 //# sourceMappingURL=IteratorObservable.js.map
 
 /***/ },
-/* 565 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var ForkJoinObservable_1 = __webpack_require__(562);
+var ForkJoinObservable_1 = __webpack_require__(563);
 exports.forkJoin = ForkJoinObservable_1.ForkJoinObservable.create;
 //# sourceMappingURL=forkJoin.js.map
 
 /***/ },
-/* 566 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61201,7 +61245,7 @@ var CatchSubscriber = (function (_super) {
 //# sourceMappingURL=catch.js.map
 
 /***/ },
-/* 567 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61256,7 +61300,7 @@ exports.concatAll = concatAll;
 //# sourceMappingURL=concatAll.js.map
 
 /***/ },
-/* 568 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61267,7 +61311,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(31);
-var async_1 = __webpack_require__(579);
+var async_1 = __webpack_require__(580);
 /**
  * Returns the source Observable delayed by the computed debounce duration,
  * with the duration lengthened if a new source item arrives before the delay
@@ -61346,7 +61390,7 @@ function dispatchNext(subscriber) {
 //# sourceMappingURL=debounceTime.js.map
 
 /***/ },
-/* 569 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61421,7 +61465,7 @@ var EverySubscriber = (function (_super) {
 //# sourceMappingURL=every.js.map
 
 /***/ },
-/* 570 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61575,7 +61619,7 @@ var FirstSubscriber = (function (_super) {
 //# sourceMappingURL=first.js.map
 
 /***/ },
-/* 571 */
+/* 572 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61699,7 +61743,7 @@ var LastSubscriber = (function (_super) {
 //# sourceMappingURL=last.js.map
 
 /***/ },
-/* 572 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61791,7 +61835,7 @@ var MapSubscriber = (function (_super) {
 //# sourceMappingURL=map.js.map
 
 /***/ },
-/* 573 */
+/* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61958,7 +62002,7 @@ exports.MergeMapSubscriber = MergeMapSubscriber;
 //# sourceMappingURL=mergeMap.js.map
 
 /***/ },
-/* 574 */
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61969,7 +62013,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(31);
-var Notification_1 = __webpack_require__(549);
+var Notification_1 = __webpack_require__(550);
 /**
  * @see {@link Notification}
  *
@@ -62039,7 +62083,7 @@ exports.ObserveOnMessage = ObserveOnMessage;
 //# sourceMappingURL=observeOn.js.map
 
 /***/ },
-/* 575 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62129,7 +62173,7 @@ exports.ReduceSubscriber = ReduceSubscriber;
 //# sourceMappingURL=reduce.js.map
 
 /***/ },
-/* 576 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62140,7 +62184,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var FutureAction_1 = __webpack_require__(230);
-var QueueScheduler_1 = __webpack_require__(578);
+var QueueScheduler_1 = __webpack_require__(579);
 var AsyncScheduler = (function (_super) {
     __extends(AsyncScheduler, _super);
     function AsyncScheduler() {
@@ -62155,7 +62199,7 @@ exports.AsyncScheduler = AsyncScheduler;
 //# sourceMappingURL=AsyncScheduler.js.map
 
 /***/ },
-/* 577 */
+/* 578 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62194,12 +62238,12 @@ exports.QueueAction = QueueAction;
 //# sourceMappingURL=QueueAction.js.map
 
 /***/ },
-/* 578 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var QueueAction_1 = __webpack_require__(577);
+var QueueAction_1 = __webpack_require__(578);
 var FutureAction_1 = __webpack_require__(230);
 var QueueScheduler = (function () {
     function QueueScheduler() {
@@ -62244,17 +62288,17 @@ exports.QueueScheduler = QueueScheduler;
 //# sourceMappingURL=QueueScheduler.js.map
 
 /***/ },
-/* 579 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var AsyncScheduler_1 = __webpack_require__(576);
+var AsyncScheduler_1 = __webpack_require__(577);
 exports.async = new AsyncScheduler_1.AsyncScheduler();
 //# sourceMappingURL=async.js.map
 
 /***/ },
-/* 580 */
+/* 581 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -62282,7 +62326,7 @@ exports.UnsubscriptionError = UnsubscriptionError;
 //# sourceMappingURL=UnsubscriptionError.js.map
 
 /***/ },
-/* 581 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62304,7 +62348,6 @@ exports.toSubscriber = toSubscriber;
 //# sourceMappingURL=toSubscriber.js.map
 
 /***/ },
-/* 582 */,
 /* 583 */,
 /* 584 */,
 /* 585 */,
@@ -62440,7 +62483,8 @@ exports.toSubscriber = toSubscriber;
 /* 715 */,
 /* 716 */,
 /* 717 */,
-/* 718 */
+/* 718 */,
+/* 719 */
 /***/ function(module, exports) {
 
 module.exports = function(module) {
@@ -62466,7 +62510,7 @@ module.exports = function(module) {
 
 
 /***/ },
-/* 719 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62477,13 +62521,13 @@ module.exports = function(module) {
 
 
 /***/ },
-/* 720 */,
-/* 721 */
+/* 721 */,
+/* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(408);
 
 
 /***/ }
-],[721]);
+],[722]);
 //# sourceMappingURL=main.map
