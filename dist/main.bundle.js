@@ -60321,7 +60321,7 @@ module.exports = ""
 /* 544 */
 /***/ function(module, exports) {
 
-module.exports = "<p>\n  This page aims to be a calculator to visualize power generation, storage and consumption for solar power systems.\n</p>\n<p>\n  If you want to submit a bug report or feature request, visit\n  <a href=\"https://github.com/crosma/solar_tool/issues\" target=\"_blank\">the Github repo issue</a> and submit a new issue.\n</p>\n"
+module.exports = "<p>\n  This page aims to be a calculator to visualize power generation, storage and consumption for solar power systems.\n</p>\n<p>\n  If you want to submit a bug report or feature request, visit\n  <a href=\"https://github.com/crosma/solar_tool/issues\" target=\"_blank\">the Github repo issue</a> and submit a new\n  issue. Pull requests are also welcome.\n</p>\n"
 
 /***/ },
 /* 545 */
