@@ -58,7 +58,7 @@ export class Consumer {
       this.wattsSurge = this.volts * this.ampsSurge;
 
     } else {
-      throw new Error("Not enough data to figure power consumption.");
+      throw new Error("Not enough user_data to figure power consumption.");
     }
   }
 

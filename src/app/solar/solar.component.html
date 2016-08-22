@@ -1,182 +1,217 @@
 <div class="row row-chart">
-  <div class="col-md-12" style="height: 300px;">
+  <div class="col-md-12">
     <app-main-chart [data]="chartData" [batteryAmpHours]="batteryAmpHours"></app-main-chart>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-6">
 
-    <table class="table table-striped table-bordered table-condensed table-hover">
-    <caption>
-      <h4>Power Consumers</h4>
-      <small>Need a better list of consumers. Ideas and data welcome.</small>
-    </caption>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Consumer</th>
-        <th>Watts</th>
-        <th>Volts</th>
-        <th>Amps</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let consumer of consumers">
-        <td style="width: 80px;">
-          <input type="number" maxlength="2" min="0" class="form-control" [(ngModel)]="consumer.quantity" (ngModelChange)="doSomething($event)">
-        </td>
-        <td>
-          <div>{{ consumer.name }}</div>
-          <small *ngIf="consumer.url"><a href="{{ consumer.url }}" target="_blank">Details...</a></small>
-          <small *ngIf="consumer.amazon_asin">
-            <a href="https://www.amazon.com/gp/product/{{ consumer.amazon_asin }}/" target="_blank">Amazon...</a>
-          </small>
-        </td>
-        <td>{{ consumer.watts | number:'1.1-1' }}</td>
-        <td>{{ consumer.volts | number:'1.1-1' }}</td>
-        <td>{{ consumer.amps | number:'1.1-1' }}</td>
-      </tr>
-    </tbody>
-    </table>
-  </div>
+<ul bootstrapTabs class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active">
+    <a bootstrapTab="tab_group" href="#consumers" aria-controls="consumers" role="tab" data-toggle="consumers">Consumers</a>
+  </li>
+  <li role="presentation">
+    <a bootstrapTab="tab_group" href="#options" aria-controls="options" role="tab" data-toggle="options">Options</a>
+  </li>
+  <li role="presentation">
+    <a bootstrapTab="tab_group" href="#data" aria-controls="data" role="tab" data-toggle="data">Data</a></li>
+</ul>
 
-  <div class="col-md-6">
+<div class="tab-content" id="tab_group">
+  <div role="tabpanel" class="tab-pane active" id="consumers">
+    <div class="row">
+      <div class="col-md-6">
 
-    <table class="table table-striped table-bordered table-condensed">
-    <caption><h4>Battery Bank</h4>
-      <small>Only AGMs have correct minimum battery level data.</small>
-    </caption>
-    <tbody>
-      <tr>
-        <th style="vertical-align: middle;">Voltage</th>
-        <td style="width: 250px;">
-          <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="batteryVoltsDC" (ngModelChange)="doSomething($event)">
-            <div class="input-group-addon">V DC</div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th style="vertical-align: middle;">Amp Hours</th>
-        <td>
-          <div class="input-group">
-            <input type="number" step="100" class="form-control" [(ngModel)]="batteryAmpHours" (ngModelChange)="doSomething($event)">
-            <div class="input-group-addon">Ah</div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th style="vertical-align: middle;">Battery Type</th>
-        <td>
-          <select [(ngModel)]="selectedBatteryIndex" class="form-control" (ngModelChange)="updateSelectedBattery($event)">
-            <option *ngFor="let battery of batteryTypes; let i = index" [value]="i">
-              {{ battery.name }}
-            </option>
-          </select>
-        </td>
-      </tr>
-    </tbody>
-    </table>
+        <table class="table table-striped table-bordered table-condensed table-hover">
+        <caption>
+          <h4>Power Consumers</h4>
+          <small>Need a better list of consumers. Ideas and data welcome.</small>
+        </caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Consumer</th>
+            <th>Watts</th>
+            <th>Volts</th>
+            <th>Amps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consumer of consumers">
+            <td style="width: 80px;">
+              <input type="number" maxlength="2" min="0" class="form-control" [(ngModel)]="consumer.quantity" (ngModelChange)="doSomething($event)">
+            </td>
+            <td>
+              <div>{{ consumer.name }}</div>
+              <small *ngIf="consumer.url"><a href="{{ consumer.url }}" target="_blank">Details...</a></small>
+              <small *ngIf="consumer.amazon_asin">
+                <a href="https://www.amazon.com/gp/product/{{ consumer.amazon_asin }}/" target="_blank">Amazon...</a>
+              </small>
+            </td>
+            <td>{{ consumer.watts | number:'1.1-1' }}</td>
+            <td>{{ consumer.volts | number:'1.1-1' }}</td>
+            <td>{{ consumer.amps | number:'1.1-1' }}</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
 
-    <table class="table table-striped table-bordered table-condensed">
-    <caption>
-      <h4>Solar</h4>
-      <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>
-    </caption>
-    <tbody>
-      <tr>
-        <th style="vertical-align: middle;">Voltage</th>
-        <td style="width: 155px;">
-          <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="solarVolts" (ngModelChange)="doSomething($event)">
-            <div class="input-group-addon">V DC</div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th style="vertical-align: middle;">Watts</th>
-        <td>
-          <div class="input-group">
-            <input type="number" min="0" step="100" class="form-control" [(ngModel)]="solarWatts" (ngModelChange)="doSomething($event)">
-            <div class="input-group-addon">W</div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    </table>
-
-    <table class="table table-striped table-bordered table-condensed">
-    <caption><h4>Inverter</h4></caption>
-    <tbody>
-      <tr>
-        <th style="vertical-align: middle;">Efficiency</th>
-        <td style="width: 155px;">
-          <div class="input-group">
-            <input type="number" min="1" max="100" class="form-control" [(ngModel)]="inverterEfficiency" (ngModelChange)="doSomething($event)">
-            <div class="input-group-addon">%</div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    </table>
+      <div class="col-md-6">
 
 
-    <table class="table table-striped table-bordered table-condensed">
-    <caption>{{ targetVoltsAC }}V AC Needs</caption>
-    <tbody>
-      <tr>
-        <th>Peak Watts Required</th>
-        <td>{{ peakWattsAC | number:'1.1-1' }}W</td>
-      </tr>
-      <tr>
-        <th>Peak Amps Required</th>
-        <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>
-      </tr>
+      </div>
+    </div><!-- /.row -->
 
-      <tr>
-        <th>Peak Surge Watts Required</th>
-        <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>
-      </tr>
-      <tr>
-        <th>Peak Surge Amps Required</th>
-        <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>
-      </tr>
-    </tbody>
-    </table>
+  </div><!-- /.tabpanel -->
 
-    <table class="table table-striped table-bordered table-condensed">
-    <caption>{{ batteryVoltsDC }}V DC Needs</caption>
-    <tbody>
-      <tr>
-        <th>Peak Watts Required By DC Consumers</th>
-        <td>{{ peakWattsDC | number:'1.1-1' }}W</td>
-      </tr>
-      <tr>
-        <th>Peak Amps Required By DC Consumers</th>
-        <td>{{ peakWattsDC / batteryVoltsDC | number:'1.1-1' }}A</td>
-      </tr>
-      <tr>
-        <th>Amp Hours Consumed By DC Consumers</th>
-        <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>
-      </tr>
+  <div role="tabpanel" class="tab-pane" id="options">
+    <div class="row">
+      <div class="col-md-6">
 
-      <tr>
-        <th>Peak Amps Used By Inverter</th>
-        <td>{{ peakWattsAC / 12 * (100 / inverterEfficiency) | number:'1.1-1' }}A</td>
-      </tr>
+        <table class="table table-striped table-bordered table-condensed">
+        <caption><h4>Battery Bank</h4>
+          <small>Only AGMs have correct minimum battery level data.</small>
+        </caption>
+        <tbody>
+          <tr>
+            <th style="vertical-align: middle;">Voltage</th>
+            <td style="width: 250px;">
+              <div class="input-group">
+                <input type="number" min="1" class="form-control" [(ngModel)]="user_data.batteryVoltsDC" (ngModelChange)="doSomething($event)">
+                <div class="input-group-addon">V DC</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th style="vertical-align: middle;">Amp Hours</th>
+            <td>
+              <div class="input-group">
+                <input type="number" step="100" class="form-control" [(ngModel)]="user_data.batteryAmpHours" (ngModelChange)="doSomething($event)">
+                <div class="input-group-addon">Ah</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th style="vertical-align: middle;">Battery Type</th>
+            <td>
+              <select [(ngModel)]="user_data.selectedBatteryIndex" class="form-control" (ngModelChange)="updateSelectedBattery($event)">
+                <option *ngFor="let battery of batteryTypes; let i = index" [value]="i">
+                  {{ battery.name }}
+                </option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+        </table>
 
-      <tr>
-        <th>Amp Hours Consumed By Inverter</th>
-        <td>{{ wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency) | number:'1.1-1' }}Ah</td>
-      </tr>
+        <table class="table table-striped table-bordered table-condensed">
+        <caption>
+          <h4>Solar</h4>
+          <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>
+        </caption>
+        <tbody>
+          <tr>
+            <th style="vertical-align: middle;">Voltage</th>
+            <td style="width: 155px;">
+              <div class="input-group">
+                <input type="number" min="1" class="form-control" [(ngModel)]="user_data.solarVolts" (ngModelChange)="doSomething($event)">
+                <div class="input-group-addon">V DC</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th style="vertical-align: middle;">Watts</th>
+            <td>
+              <div class="input-group">
+                <input type="number" min="0" step="100" class="form-control" [(ngModel)]="user_data.solarWatts" (ngModelChange)="doSomething($event)">
+                <div class="input-group-addon">W</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        </table>
 
-      <tr>
-        <th>Total Amp Hours Consumed</th>
-        <td>{{ (wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>
-      </tr>
-    </tbody>
-    </table>
+        <table class="table table-striped table-bordered table-condensed">
+        <caption><h4>Inverter</h4></caption>
+        <tbody>
+          <tr>
+            <th style="vertical-align: middle;">Efficiency</th>
+            <td style="width: 155px;">
+              <div class="input-group">
+                <input type="number" min="1" max="100" class="form-control" [(ngModel)]="user_data.inverterEfficiency" (ngModelChange)="doSomething($event)">
+                <div class="input-group-addon">%</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        </table>
 
-  </div>
-</div>
+
+        <table class="table table-striped table-bordered table-condensed">
+        <caption>{{ targetVoltsAC }}V AC Needs</caption>
+        <tbody>
+          <tr>
+            <th>Peak Watts Required</th>
+            <td>{{ peakWattsAC | number:'1.1-1' }}W</td>
+          </tr>
+          <tr>
+            <th>Peak Amps Required</th>
+            <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>
+          </tr>
+
+          <tr>
+            <th>Peak Surge Watts Required</th>
+            <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>
+          </tr>
+          <tr>
+            <th>Peak Surge Amps Required</th>
+            <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>
+          </tr>
+        </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div><!-- /.tabpanel -->
+
+  <div role="tabpanel" class="tab-pane" id="data">
+    <div class="row">
+      <div class="col-md-6">
+
+        <table class="table table-striped table-bordered table-condensed">
+        <caption>{{ batteryVoltsDC }}V DC Needs</caption>
+        <tbody>
+          <tr>
+            <th>Peak Watts Required By DC Consumers</th>
+            <td>{{ peakWattsDC | number:'1.1-1' }}W</td>
+          </tr>
+          <tr>
+            <th>Peak Amps Required By DC Consumers</th>
+            <td>{{ peakWattsDC / user_data.batteryVoltsDC | number:'1.1-1' }}A</td>
+          </tr>
+          <tr>
+            <th>Amp Hours Consumed By DC Consumers</th>
+            <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>
+          </tr>
+
+          <tr>
+            <th>Peak Amps Used By Inverter</th>
+            <td>{{ peakWattsAC / 12 * (100 / user_data.inverterEfficiency) | number:'1.1-1' }}A</td>
+          </tr>
+
+          <tr>
+            <th>Amp Hours Consumed By Inverter</th>
+            <td>{{ wattHoursAC / user_data.batteryVoltsDC * (100 / user_data.inverterEfficiency) | number:'1.1-1' }}Ah</td>
+          </tr>
+
+          <tr>
+            <th>Total Amp Hours Consumed</th>
+            <td>{{ (wattHoursAC / user_data.batteryVoltsDC * (100 / user_data.inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>
+          </tr>
+        </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div><!-- /.tabpanel -->
+</div><!-- /.tab-content -->

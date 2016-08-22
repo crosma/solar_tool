@@ -24,8 +24,6 @@ export class MainChartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('ngOnInit');
-
     var div = this.myElement.nativeElement.getElementsByTagName("div");
     this.containerElement = div[0];
 
@@ -33,8 +31,6 @@ export class MainChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('ngOnChanges');
-
     this.updateGraph();
   }
 
@@ -49,15 +45,12 @@ export class MainChartComponent implements OnInit, OnChanges {
 
     this.updateGraphTimeout && clearTimeout(this.updateGraphTimeout);
     this.updateGraphTimeout = setTimeout(() => {
-      console.log('Updating graph.');
-
-
       var data = new google.visualization.DataTable();
       data.addColumn('number', 'Day, Hour'); // Implicit domain column.
-      data.addColumn('number', 'Amps Created'); // Implicit data column.
-      data.addColumn('number', 'Amps Consumed'); // Implicit data column.
+      data.addColumn('number', 'Amps Created'); // Implicit user_data column.
+      data.addColumn('number', 'Amps Consumed'); // Implicit user_data column.
 
-      data.addColumn('number', 'Battery Charge Level'); // Implicit data column.
+      data.addColumn('number', 'Battery Charge Level'); // Implicit user_data column.
       data.addColumn({'type': 'string', 'role': 'style'});
 
       data.addColumn('number', 'Battery Safe Minimum');
@@ -68,8 +61,8 @@ export class MainChartComponent implements OnInit, OnChanges {
 
       data.addColumn('number', 'Battery Danger Minimum');
       data.addColumn({type:'boolean', role: 'certainty'});
-      //data.addColumn({type:'number', role: 'interval'});
-      //data.addColumn('number', 'Expenses');
+      //user_data.addColumn({type:'number', role: 'interval'});
+      //user_data.addColumn('number', 'Expenses');
 
       data.addRows(this.data);
 

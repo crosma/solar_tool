@@ -46410,26 +46410,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var SolarComponent = (function () {
     function SolarComponent() {
         this.consumers = __WEBPACK_IMPORTED_MODULE_1__consumers_basic__["a" /* BasicConsumers */];
+        this.user_data = {
+            batteryVoltsDC: 12,
+            batteryAmpHours: 200,
+            selectedBatteryIndex: 0,
+            solarVolts: 12,
+            solarWatts: 300,
+        };
         this.peakWattsAC = 0;
         this.peakWattsSurgeAC = 0;
         this.wattHoursAC = 0;
         this.targetVoltsAC = 110;
-        this.batteryVoltsDC = 12;
-        this.batteryAmpHours = 200;
         this.batteryTypes = __WEBPACK_IMPORTED_MODULE_2__batteries__["a" /* BatteryTypes */];
         this.selectedBattery = __WEBPACK_IMPORTED_MODULE_2__batteries__["a" /* BatteryTypes */][0];
-        this.selectedBatteryIndex = 0;
         this.peakWattsDC = 0;
         this.peakWattsSurgeDC = 0;
         this.wattHoursDC = 0;
-        this.solarVolts = 12;
-        this.solarWatts = 300;
         this.inverterEfficiency = 90;
         this.hours = [];
         this.chartData = [];
         this.doSomethingTimeout = null;
     }
     SolarComponent.prototype.ngOnInit = function () {
+        this.loadData();
         this.update();
     };
     SolarComponent.prototype.update = function () {
@@ -46447,9 +46450,9 @@ var SolarComponent = (function () {
                 this.wattHoursAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
             }
             else {
-                this.peakWattsDC += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity;
-                this.peakWattsSurgeAC += consumer.volts / this.batteryVoltsDC * consumer.wattsSurge * consumer.quantity;
-                this.wattHoursDC += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
+                this.peakWattsDC += consumer.volts / this.user_data.batteryVoltsDC * consumer.watts * consumer.quantity;
+                this.peakWattsSurgeAC += consumer.volts / this.user_data.batteryVoltsDC * consumer.wattsSurge * consumer.quantity;
+                this.wattHoursDC += consumer.volts / this.user_data.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
             }
         }
         var solarHours = {
@@ -46478,13 +46481,13 @@ var SolarComponent = (function () {
             22: 0,
             23: 0,
         };
-        var currentBatteryAmps = this.batteryAmpHours;
+        var currentBatteryAmps = this.user_data.batteryAmpHours;
         this.chartData = [];
         this.hours = [];
         for (var day = 1; day <= 3; day++) {
             for (var h = 0; h < 24; h++) {
                 var hour = {
-                    createdAmps: this.solarWatts / this.solarVolts * solarHours[h],
+                    createdAmps: this.user_data.solarWatts / this.user_data.solarVolts * solarHours[h],
                     usedAmps: 0,
                 };
                 var wattsAC = 0;
@@ -46496,10 +46499,10 @@ var SolarComponent = (function () {
                         wattsAC += consumer.volts / this.targetVoltsAC * consumer.watts * consumer.quantity * consumer.dutyCycle; // * consumer.getHoursPerDay();
                     }
                     else {
-                        hour.usedAmps += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.batteryVoltsDC; // * consumer.getHoursPerDay();
+                        hour.usedAmps += consumer.volts / this.user_data.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.user_data.batteryVoltsDC; // * consumer.getHoursPerDay();
                     }
                 }
-                hour.usedAmps += wattsAC / this.batteryVoltsDC * (100 / this.inverterEfficiency);
+                hour.usedAmps += wattsAC / this.user_data.batteryVoltsDC * (100 / this.inverterEfficiency);
                 this.hours.push(hour);
                 //todo pass the hours array to the chart, build chartData in chart code
                 this.chartData.push([
@@ -46508,17 +46511,17 @@ var SolarComponent = (function () {
                     hour.createdAmps,
                     hour.usedAmps,
                     currentBatteryAmps,
-                    currentBatteryAmps < this.batteryAmpHours * 0.5 ? 'color: #FF0000' : '',
-                    this.batteryAmpHours * 0.5,
+                    currentBatteryAmps < this.user_data.batteryAmpHours * 0.5 ? 'color: #FF0000' : '',
+                    this.user_data.batteryAmpHours * 0.5,
                     false,
-                    this.batteryAmpHours * 0.4,
+                    this.user_data.batteryAmpHours * 0.4,
                     false,
-                    this.batteryAmpHours * 0.3,
+                    this.user_data.batteryAmpHours * 0.3,
                     false,
                 ]);
                 currentBatteryAmps -= hour.usedAmps;
                 currentBatteryAmps += hour.createdAmps;
-                currentBatteryAmps = Math.max(Math.min(currentBatteryAmps, this.batteryAmpHours), 0);
+                currentBatteryAmps = Math.max(Math.min(currentBatteryAmps, this.user_data.batteryAmpHours), 0);
             } // for h
         } // for day
     };
@@ -46527,11 +46530,13 @@ var SolarComponent = (function () {
         this.doSomethingTimeout && clearTimeout(this.doSomethingTimeout);
         this.doSomethingTimeout = setTimeout(function () {
             _this.update();
+            _this.saveData();
         }, 50);
     };
     SolarComponent.prototype.updateSelectedBattery = function (index) {
         this.selectedBattery = __WEBPACK_IMPORTED_MODULE_2__batteries__["a" /* BatteryTypes */][index];
         this.doSomething(index);
+        this.saveData();
     };
     SolarComponent.prototype.hourToAmPm = function (hour) {
         if (hour == 0)
@@ -46542,6 +46547,27 @@ var SolarComponent = (function () {
             return '12PM';
         else
             return (hour - 12) + "PM";
+    };
+    SolarComponent.prototype.saveData = function () {
+        if (window.localStorage) {
+            window.localStorage['user_data'] = JSON.stringify(this.user_data);
+        }
+    };
+    SolarComponent.prototype.loadData = function () {
+        var _this = this;
+        if (window.localStorage) {
+            try {
+                var saved_data = JSON.parse(window.localStorage['user_data']);
+                Object.keys(saved_data).forEach(function (val, key) {
+                    if (_this.user_data[key])
+                        _this.user_data[key] = val;
+                });
+                this.selectedBattery = __WEBPACK_IMPORTED_MODULE_2__batteries__["a" /* BatteryTypes */][this.user_data.selectedBatteryIndex];
+            }
+            catch (e) {
+                console.warn('Failed to load user_data.', e);
+            }
+        }
     };
     SolarComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -59984,7 +60010,7 @@ var Consumer = (function () {
             this.wattsSurge = this.volts * this.ampsSurge;
         }
         else {
-            throw new Error("Not enough data to figure power consumption.");
+            throw new Error("Not enough user_data to figure power consumption.");
         }
     }
     Consumer.prototype.getHoursPerDay = function () {
@@ -60133,9 +60159,9 @@ var MainChartComponent = (function () {
             console.log('Updating graph.');
             var data = new google.visualization.DataTable();
             data.addColumn('number', 'Day, Hour'); // Implicit domain column.
-            data.addColumn('number', 'Amps Created'); // Implicit data column.
-            data.addColumn('number', 'Amps Consumed'); // Implicit data column.
-            data.addColumn('number', 'Battery Charge Level'); // Implicit data column.
+            data.addColumn('number', 'Amps Created'); // Implicit user_data column.
+            data.addColumn('number', 'Amps Consumed'); // Implicit user_data column.
+            data.addColumn('number', 'Battery Charge Level'); // Implicit user_data column.
             data.addColumn({ 'type': 'string', 'role': 'style' });
             data.addColumn('number', 'Battery Safe Minimum');
             data.addColumn({ type: 'boolean', role: 'certainty' });
@@ -60143,8 +60169,8 @@ var MainChartComponent = (function () {
             data.addColumn({ type: 'boolean', role: 'certainty' });
             data.addColumn('number', 'Battery Danger Minimum');
             data.addColumn({ type: 'boolean', role: 'certainty' });
-            //data.addColumn({type:'number', role: 'interval'});
-            //data.addColumn('number', 'Expenses');
+            //user_data.addColumn({type:'number', role: 'interval'});
+            //user_data.addColumn('number', 'Expenses');
             data.addRows(_this.data);
             var formatAhTwoDigits = new google.visualization.NumberFormat({
                 fractionDigits: 2,
@@ -60227,7 +60253,7 @@ module.exports = "body {\n  min-height: 2000px; }\n\n.navbar-static-top {\n  mar
 /* 539 */
 /***/ function(module, exports) {
 
-module.exports = "div {\n  display: block;\n  width: 100%; }\n"
+module.exports = "div {\n  display: block;\n  width: 100%;\n  height: 300px;\n  background: #e7e7e7; }\n"
 
 /***/ },
 /* 540 */
@@ -60257,7 +60283,7 @@ module.exports = "<p>\r\n  This page aims to be a calculator to visualize power 
 /* 544 */
 /***/ function(module, exports) {
 
-module.exports = "<!-- Static navbar -->\r\n<nav class=\"navbar navbar-default navbar-static-top\">\r\n  <div class=\"container\">\r\n    <div class=\"navbar-header\">\r\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n        <span class=\"sr-only\">Toggle navigation</span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <a routerLink=\"/\" class=\"navbar-brand\">Solar Tool</a>\r\n    </div>\r\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n      <ul class=\"nav navbar-nav\">\r\n        <li><a routerLink=\"/todo\" routerLinkActive=\"active\">Todo List</a></li>\r\n        <li><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\r\n        <!--\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\r\n          <ul class=\"dropdown-menu\">\r\n            <li><a href=\"#\">Action</a></li>\r\n            <li><a href=\"#\">Another action</a></li>\r\n            <li><a href=\"#\">Something else here</a></li>\r\n            <li role=\"separator\" class=\"divider\"></li>\r\n            <li class=\"dropdown-header\">Nav header</li>\r\n            <li><a href=\"#\">Separated link</a></li>\r\n            <li><a href=\"#\">One more separated link</a></li>\r\n          </ul>\r\n        </li>\r\n        -->\r\n      </ul>\r\n\r\n    </div><!--/.nav-collapse -->\r\n  </div>\r\n</nav>\r\n\r\n\r\n<div class=\"container\">\r\n  <router-outlet></router-outlet>\r\n</div> <!-- /container -->\r\n\r\n\r\n"
+module.exports = "<!-- Static navbar -->\n<nav class=\"navbar navbar-default navbar-static-top\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a routerLink=\"/\" class=\"navbar-brand\">Solar Tool</a>\n    </div>\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a routerLink=\"/todo\" routerLinkActive=\"active\">Todo List</a></li>\n        <li><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n        <!--\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" user_data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li class=\"dropdown-header\">Nav header</li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li><a href=\"#\">One more separated link</a></li>\n          </ul>\n        </li>\n        -->\n      </ul>\n\n    </div><!--/.nav-collapse -->\n  </div>\n</nav>\n\n\n<div class=\"container\">\n  <router-outlet></router-outlet>\n</div> <!-- /container -->\n\n\n"
 
 /***/ },
 /* 545 */
@@ -60275,7 +60301,7 @@ module.exports = "<div></div>\r\n"
 /* 547 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"row row-chart\">\r\n  <div class=\"col-md-12\" style=\"height: 300px;\">\r\n    <app-main-chart [data]=\"chartData\" [batteryAmpHours]=\"batteryAmpHours\"></app-main-chart>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\">\r\n\r\n    <table class=\"table table-striped table-bordered table-condensed table-hover\">\r\n    <caption>\r\n      <h4>Power Consumers</h4>\r\n      <small>Need a better list of consumers. Ideas and data welcome.</small>\r\n    </caption>\r\n    <thead>\r\n      <tr>\r\n        <th>#</th>\r\n        <th>Consumer</th>\r\n        <th>Watts</th>\r\n        <th>Volts</th>\r\n        <th>Amps</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let consumer of consumers\">\r\n        <td style=\"width: 80px;\">\r\n          <input type=\"number\" maxlength=\"2\" min=\"0\" class=\"form-control\" [(ngModel)]=\"consumer.quantity\" (ngModelChange)=\"doSomething($event)\">\r\n        </td>\r\n        <td>\r\n          <div>{{ consumer.name }}</div>\r\n          <small *ngIf=\"consumer.url\"><a href=\"{{ consumer.url }}\" target=\"_blank\">Details...</a></small>\r\n          <small *ngIf=\"consumer.amazon_asin\">\r\n            <a href=\"https://www.amazon.com/gp/product/{{ consumer.amazon_asin }}/\" target=\"_blank\">Amazon...</a>\r\n          </small>\r\n        </td>\r\n        <td>{{ consumer.watts | number:'1.1-1' }}</td>\r\n        <td>{{ consumer.volts | number:'1.1-1' }}</td>\r\n        <td>{{ consumer.amps | number:'1.1-1' }}</td>\r\n      </tr>\r\n    </tbody>\r\n    </table>\r\n  </div>\r\n\r\n  <div class=\"col-md-6\">\r\n\r\n    <table class=\"table table-striped table-bordered table-condensed\">\r\n    <caption><h4>Battery Bank</h4>\r\n      <small>Only AGMs have correct minimum battery level data.</small>\r\n    </caption>\r\n    <tbody>\r\n      <tr>\r\n        <th style=\"vertical-align: middle;\">Voltage</th>\r\n        <td style=\"width: 250px;\">\r\n          <div class=\"input-group\">\r\n            <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"batteryVoltsDC\" (ngModelChange)=\"doSomething($event)\">\r\n            <div class=\"input-group-addon\">V DC</div>\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <th style=\"vertical-align: middle;\">Amp Hours</th>\r\n        <td>\r\n          <div class=\"input-group\">\r\n            <input type=\"number\" step=\"100\" class=\"form-control\" [(ngModel)]=\"batteryAmpHours\" (ngModelChange)=\"doSomething($event)\">\r\n            <div class=\"input-group-addon\">Ah</div>\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <th style=\"vertical-align: middle;\">Battery Type</th>\r\n        <td>\r\n          <select [(ngModel)]=\"selectedBatteryIndex\" class=\"form-control\" (ngModelChange)=\"updateSelectedBattery($event)\">\r\n            <option *ngFor=\"let battery of batteryTypes; let i = index\" [value]=\"i\">\r\n              {{ battery.name }}\r\n            </option>\r\n          </select>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n    </table>\r\n\r\n    <table class=\"table table-striped table-bordered table-condensed\">\r\n    <caption>\r\n      <h4>Solar</h4>\r\n      <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>\r\n    </caption>\r\n    <tbody>\r\n      <tr>\r\n        <th style=\"vertical-align: middle;\">Voltage</th>\r\n        <td style=\"width: 155px;\">\r\n          <div class=\"input-group\">\r\n            <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"solarVolts\" (ngModelChange)=\"doSomething($event)\">\r\n            <div class=\"input-group-addon\">V DC</div>\r\n          </div>\r\n        </td>\r\n      </tr>\r\n      <tr>\r\n        <th style=\"vertical-align: middle;\">Watts</th>\r\n        <td>\r\n          <div class=\"input-group\">\r\n            <input type=\"number\" min=\"0\" step=\"100\" class=\"form-control\" [(ngModel)]=\"solarWatts\" (ngModelChange)=\"doSomething($event)\">\r\n            <div class=\"input-group-addon\">W</div>\r\n          </div>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n    </table>\r\n\r\n    <table class=\"table table-striped table-bordered table-condensed\">\r\n    <caption><h4>Inverter</h4></caption>\r\n    <tbody>\r\n      <tr>\r\n        <th style=\"vertical-align: middle;\">Efficiency</th>\r\n        <td style=\"width: 155px;\">\r\n          <div class=\"input-group\">\r\n            <input type=\"number\" min=\"1\" max=\"100\" class=\"form-control\" [(ngModel)]=\"inverterEfficiency\" (ngModelChange)=\"doSomething($event)\">\r\n            <div class=\"input-group-addon\">%</div>\r\n          </div>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n    </table>\r\n\r\n\r\n    <table class=\"table table-striped table-bordered table-condensed\">\r\n    <caption>{{ targetVoltsAC }}V AC Needs</caption>\r\n    <tbody>\r\n      <tr>\r\n        <th>Peak Watts Required</th>\r\n        <td>{{ peakWattsAC | number:'1.1-1' }}W</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Peak Amps Required</th>\r\n        <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Peak Surge Watts Required</th>\r\n        <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Peak Surge Amps Required</th>\r\n        <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>\r\n      </tr>\r\n    </tbody>\r\n    </table>\r\n\r\n    <table class=\"table table-striped table-bordered table-condensed\">\r\n    <caption>{{ batteryVoltsDC }}V DC Needs</caption>\r\n    <tbody>\r\n      <tr>\r\n        <th>Peak Watts Required By DC Consumers</th>\r\n        <td>{{ peakWattsDC | number:'1.1-1' }}W</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Peak Amps Required By DC Consumers</th>\r\n        <td>{{ peakWattsDC / batteryVoltsDC | number:'1.1-1' }}A</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Amp Hours Consumed By DC Consumers</th>\r\n        <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Peak Amps Used By Inverter</th>\r\n        <td>{{ peakWattsAC / 12 * (100 / inverterEfficiency) | number:'1.1-1' }}A</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Amp Hours Consumed By Inverter</th>\r\n        <td>{{ wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency) | number:'1.1-1' }}Ah</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Total Amp Hours Consumed</th>\r\n        <td>{{ (wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>\r\n      </tr>\r\n    </tbody>\r\n    </table>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row row-chart\">\n  <div class=\"col-md-12\">\n    <app-main-chart [data]=\"chartData\" [batteryAmpHours]=\"batteryAmpHours\"></app-main-chart>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-6\">\n\n    <table class=\"table table-striped table-bordered table-condensed table-hover\">\n    <caption>\n      <h4>Power Consumers</h4>\n      <small>Need a better list of consumers. Ideas and data welcome.</small>\n    </caption>\n    <thead>\n      <tr>\n        <th>#</th>\n        <th>Consumer</th>\n        <th>Watts</th>\n        <th>Volts</th>\n        <th>Amps</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let consumer of consumers\">\n        <td style=\"width: 80px;\">\n          <input type=\"number\" maxlength=\"2\" min=\"0\" class=\"form-control\" [(ngModel)]=\"consumer.quantity\" (ngModelChange)=\"doSomething($event)\">\n        </td>\n        <td>\n          <div>{{ consumer.name }}</div>\n          <small *ngIf=\"consumer.url\"><a href=\"{{ consumer.url }}\" target=\"_blank\">Details...</a></small>\n          <small *ngIf=\"consumer.amazon_asin\">\n            <a href=\"https://www.amazon.com/gp/product/{{ consumer.amazon_asin }}/\" target=\"_blank\">Amazon...</a>\n          </small>\n        </td>\n        <td>{{ consumer.watts | number:'1.1-1' }}</td>\n        <td>{{ consumer.volts | number:'1.1-1' }}</td>\n        <td>{{ consumer.amps | number:'1.1-1' }}</td>\n      </tr>\n    </tbody>\n    </table>\n  </div>\n\n  <div class=\"col-md-6\">\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption><h4>Battery Bank</h4>\n      <small>Only AGMs have correct minimum battery level data.</small>\n    </caption>\n    <tbody>\n      <tr>\n        <th style=\"vertical-align: middle;\">Voltage</th>\n        <td style=\"width: 250px;\">\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"user_data.batteryVoltsDC\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">V DC</div>\n          </div>\n        </td>\n      </tr>\n      <tr>\n        <th style=\"vertical-align: middle;\">Amp Hours</th>\n        <td>\n          <div class=\"input-group\">\n            <input type=\"number\" step=\"100\" class=\"form-control\" [(ngModel)]=\"user_data.batteryAmpHours\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">Ah</div>\n          </div>\n        </td>\n      </tr>\n      <tr>\n        <th style=\"vertical-align: middle;\">Battery Type</th>\n        <td>\n          <select [(ngModel)]=\"user_data.selectedBatteryIndex\" class=\"form-control\" (ngModelChange)=\"updateSelectedBattery($event)\">\n            <option *ngFor=\"let battery of batteryTypes; let i = index\" [value]=\"i\">\n              {{ battery.name }}\n            </option>\n          </select>\n        </td>\n      </tr>\n    </tbody>\n    </table>\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption>\n      <h4>Solar</h4>\n      <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>\n    </caption>\n    <tbody>\n      <tr>\n        <th style=\"vertical-align: middle;\">Voltage</th>\n        <td style=\"width: 155px;\">\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"1\" class=\"form-control\" [(ngModel)]=\"solarVolts\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">V DC</div>\n          </div>\n        </td>\n      </tr>\n      <tr>\n        <th style=\"vertical-align: middle;\">Watts</th>\n        <td>\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"0\" step=\"100\" class=\"form-control\" [(ngModel)]=\"solarWatts\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">W</div>\n          </div>\n        </td>\n      </tr>\n    </tbody>\n    </table>\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption><h4>Inverter</h4></caption>\n    <tbody>\n      <tr>\n        <th style=\"vertical-align: middle;\">Efficiency</th>\n        <td style=\"width: 155px;\">\n          <div class=\"input-group\">\n            <input type=\"number\" min=\"1\" max=\"100\" class=\"form-control\" [(ngModel)]=\"inverterEfficiency\" (ngModelChange)=\"doSomething($event)\">\n            <div class=\"input-group-addon\">%</div>\n          </div>\n        </td>\n      </tr>\n    </tbody>\n    </table>\n\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption>{{ targetVoltsAC }}V AC Needs</caption>\n    <tbody>\n      <tr>\n        <th>Peak Watts Required</th>\n        <td>{{ peakWattsAC | number:'1.1-1' }}W</td>\n      </tr>\n      <tr>\n        <th>Peak Amps Required</th>\n        <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>\n      </tr>\n\n      <tr>\n        <th>Peak Surge Watts Required</th>\n        <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>\n      </tr>\n      <tr>\n        <th>Peak Surge Amps Required</th>\n        <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>\n      </tr>\n    </tbody>\n    </table>\n\n    <table class=\"table table-striped table-bordered table-condensed\">\n    <caption>{{ batteryVoltsDC }}V DC Needs</caption>\n    <tbody>\n      <tr>\n        <th>Peak Watts Required By DC Consumers</th>\n        <td>{{ peakWattsDC | number:'1.1-1' }}W</td>\n      </tr>\n      <tr>\n        <th>Peak Amps Required By DC Consumers</th>\n        <td>{{ peakWattsDC / batteryVoltsDC | number:'1.1-1' }}A</td>\n      </tr>\n      <tr>\n        <th>Amp Hours Consumed By DC Consumers</th>\n        <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>\n      </tr>\n\n      <tr>\n        <th>Peak Amps Used By Inverter</th>\n        <td>{{ peakWattsAC / 12 * (100 / inverterEfficiency) | number:'1.1-1' }}A</td>\n      </tr>\n\n      <tr>\n        <th>Amp Hours Consumed By Inverter</th>\n        <td>{{ wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency) | number:'1.1-1' }}Ah</td>\n      </tr>\n\n      <tr>\n        <th>Total Amp Hours Consumed</th>\n        <td>{{ (wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>\n      </tr>\n    </tbody>\n    </table>\n\n  </div>\n</div>\n"
 
 /***/ },
 /* 548 */
