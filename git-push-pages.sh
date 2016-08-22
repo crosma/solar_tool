@@ -3,7 +3,7 @@
 
 ng build #--prod
 
-git add -f dist
+git add dist
 git commit -m "Updating gh-pages"
 #git push
 git subtree push --prefix dist origin gh-pages
