@@ -3,7 +3,7 @@
 
 ng build #--prod
 
-git add dist
+git add -f dist
 git commit -m "Updating gh-pages (temp message)"
 
 git branch -D gh-pages || true
@@ -14,4 +14,4 @@ git branch -D gh-pages # delete the local gh-pages because you will need it: ref
 #git push
 #git subtree push --prefix dist origin gh-pages
 git reset --soft HEAD^
-#git rm -r --cached dist
+git rm -r --cached dist
