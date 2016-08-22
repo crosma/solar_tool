@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <script>
+    var url = window.location.href.replace(/(https:\/\/.*?\.github\.io\/.*?)\/(.*)/g, "$1/#/$2");
+    window.location = url;
+  </script>
 </head>
 <body>
-
+This should redirect automatically. If it doesn't, go to
+<a href="https://crosma.github.io/solar_tool">https://crosma.github.io/solar_tool</a>.
 </body>
 </html>
