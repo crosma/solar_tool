@@ -72,8 +72,8 @@ export class Consumer {
 }
 
 
-export function createConsumersFromDefinitions(defs: ConsumerDefinitions): Array<Consumer> {
-  let list: Array<Consumer> = [];
+export function createConsumersFromDefinitions(defs: ConsumerDefinitions): Consumer[] {
+  let list: Consumer[] = [];
 
   for (let def of defs) {
     list.push(new Consumer(def));

@@ -1,15 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {BasicConsumers} from './consumers-basic';
-import {Battery, BatteryTypes} from './batteries';
+import {Battery, Batteries, BatteriesService} from '../services';
+import {ConsumersService} from '../services';
+import {Consumer, BasicConsumers} from '../services/consumers'
 
 @Component({
   // moduleId: module.id,
   selector: 'app-solar',
   templateUrl: 'solar.component.html',
   styleUrls: ['solar.component.scss'],
+  providers: [ConsumersService, BatteriesService],
 })
 export class SolarComponent implements OnInit {
-  consumers = BasicConsumers;
+  consumers: Consumer[];
 
   user_data = {
     batteryVoltsDC: 12,
@@ -27,8 +29,8 @@ export class SolarComponent implements OnInit {
   peakWattsSurgeAC = 0;
   wattHoursAC = 0;
 
-  batteryTypes = BatteryTypes;
-  selectedBattery: Battery = BatteryTypes[0];
+  batteryTypes: Batteries;
+  selectedBattery: Battery;
 
   peakWattsDC = 0;
   peakWattsSurgeDC = 0;
@@ -36,6 +38,13 @@ export class SolarComponent implements OnInit {
 
   hours: GraphPoints = [];
   chartData = [];
+
+  constructor(consumerService: ConsumersService, batteriesService: BatteriesService) {
+    this.consumers = consumerService.getConsumers();
+
+    this.batteryTypes = batteriesService.getBatteryTypes();
+    this.selectedBattery = this.batteryTypes[0];
+  }
 
   ngOnInit() {
     this.loadData();
@@ -157,7 +166,7 @@ export class SolarComponent implements OnInit {
   }
 
   updateSelectedBattery(index) {
-    this.selectedBattery = BatteryTypes[index];
+    this.selectedBattery = this.batteryTypes[index];
 
     this.doSomething(index);
 
@@ -172,9 +181,9 @@ export class SolarComponent implements OnInit {
   }
 
   saveData() {
-     if (window.localStorage) {
-       window.localStorage['user_data'] = JSON.stringify(this.user_data);
-     }
+    if (window.localStorage) {
+      window.localStorage['user_data'] = JSON.stringify(this.user_data);
+    }
   }
 
   loadData() {
@@ -186,7 +195,7 @@ export class SolarComponent implements OnInit {
           if (this.user_data[key]) this.user_data[key] = saved_data[key];
         });
 
-        this.selectedBattery = BatteryTypes[this.user_data.selectedBatteryIndex];
+        this.selectedBattery = this.batteryTypes[this.user_data.selectedBatteryIndex];
       } catch (e) {
         console.warn('Failed to load user_data.', e);
       }
