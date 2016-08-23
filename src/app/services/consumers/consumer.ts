@@ -71,9 +71,10 @@ export class Consumer {
   }
 }
 
+export declare type Consumers = Consumer[];
 
-export function createConsumersFromDefinitions(defs: ConsumerDefinitions): Consumer[] {
-  let list: Consumer[] = [];
+export function createConsumersFromDefinitions(defs: ConsumerDefinitions): Consumers {
+  let list: Consumers = [];
 
   for (let def of defs) {
     list.push(new Consumer(def));

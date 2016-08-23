@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Consumers} from '../../services/consumers'
 
 @Component({
   selector: 'app-consumers',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['consumers.component.scss']
 })
 export class ConsumersComponent implements OnInit {
+  @Input() consumers: Consumers;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }

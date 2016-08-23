@@ -1,13 +1,19 @@
 import {Component, OnInit} from '@angular/core';
+
+//data
 import {Battery, Batteries, BatteriesService} from '../services';
 import {ConsumersService} from '../services';
 import {Consumer, BasicConsumers} from '../services/consumers'
+
+//components
+import { MainChartComponent } from './main-chart'; //TODO: Probably does not need to be global
 
 @Component({
   // moduleId: module.id,
   selector: 'app-solar',
   templateUrl: 'solar.component.html',
   styleUrls: ['solar.component.scss'],
+  directives: [MainChartComponent],
   providers: [ConsumersService, BatteriesService],
 })
 export class SolarComponent implements OnInit {
