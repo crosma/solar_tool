@@ -9,7 +9,6 @@ import {Consumer, BasicConsumers} from '../services/consumers'
 import { MainChartComponent } from './main-chart'; //TODO: Probably does not need to be global
 
 @Component({
-  // moduleId: module.id,
   selector: 'app-solar',
   templateUrl: 'solar.component.html',
   styleUrls: ['solar.component.scss'],
