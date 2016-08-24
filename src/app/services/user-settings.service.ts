@@ -2,12 +2,17 @@ import {Injectable, Inject} from '@angular/core';
 import {Battery, Batteries, BatteriesService} from '../services';
 import {Subject} from 'rxjs/Subject';
 
+interface SettingUpdate {
+  key: string;
+  val: any;
+}
+
 @Injectable()
 export class UserSettingsService {
   private settings = {
     batteryVoltsDC: 12,
     batteryAmpHours: 200,
-    selectedBatteryIndex: 0,
+    batteryIndex: 0,
 
     solarVolts: 12,
     solarWatts: 300,
@@ -16,10 +21,10 @@ export class UserSettingsService {
     inverterOutputVolts: 110,
   };
 
-  private settingsChangedSourceSubject = new Subject();
-  settingsChanged$ = this.settingsChangedSourceSubject.asObservable();
+  private settingsChangedSource = new Subject<SettingUpdate>();
+  settingsChanged$ = this.settingsChangedSource.asObservable();
 
-  private _selectedBattery: Battery;
+  private _battery: Battery;
 
   constructor(@Inject(BatteriesService) private batteriesService: BatteriesService) {
     this.load();
@@ -34,18 +39,28 @@ export class UserSettingsService {
           if (this.settings[key]) this.settings[key] = saved_data[key];
         });
 
-        this._selectedBattery = this.batteriesService.getBatteryTypes()[this.selectedBatteryIndex];
+        this._battery = this.batteriesService.getBatteryTypes()[this.batteryIndex];
       } catch (e) {
         console.warn('Failed to load userData.', e);
       }
     }
   }
 
+  //TODO: Debounce this function
   private save() {
-    this.settingsChangedSourceSubject.next();
-
     if (window.localStorage) {
       window.localStorage['user_data'] = JSON.stringify(this.settings);
+    }
+  }
+
+  private updateValue(key:string, val:any) {
+    if (this.settings[key] !== val) { //only update if changed
+      console.log('user settings changed');
+
+      this.settings[key] = val; //store value
+      this.settingsChangedSource.next({key, val}); //fire event
+
+      this.save(); //save settings
     }
   }
 
@@ -54,8 +69,7 @@ export class UserSettingsService {
   }
 
   set batteryVoltsDC(value: number) {
-    this.settings.batteryVoltsDC = value;
-    this.save();
+    this.updateValue('batteryVoltsDC', value);
   }
 
   get batteryAmpHours(): number {
@@ -63,27 +77,24 @@ export class UserSettingsService {
   }
 
   set batteryAmpHours(value: number) {
-    this.settings.batteryAmpHours = value;
-    this.save();
+    this.updateValue('batteryAmpHours', value);
   }
 
-  get selectedBatteryIndex(): number {
-    return this.settings.selectedBatteryIndex;
+  get batteryIndex(): number {
+    return this.settings.batteryIndex;
   }
 
-  set selectedBatteryIndex(value: number) {
-    this.settings.selectedBatteryIndex = value;
-    this._selectedBattery = this.batteriesService.getBatteryTypes()[value];
-    this.save();
+  set batteryIndex(value: number) {
+    this._battery = this.batteriesService.getBatteryTypes()[value];
+    this.updateValue('batteryIndex', value);
   }
 
-  get selectedBattery(): Battery {
-    return this._selectedBattery;
+  get battery(): Battery {
+    return this._battery;
   }
-
   /*
-   set selectedBattery(value: Battery) {
-   this._selectedBattery = value;
+   set battery(value: Battery) {
+   this._battery = value;
    this.save();
    }
    */
@@ -94,8 +105,7 @@ export class UserSettingsService {
   }
 
   set solarVolts(value: number) {
-    this.settings.solarVolts = value;
-    this.save();
+    this.updateValue('solarVolts', value);
   }
 
   get solarWatts(): number {
@@ -103,8 +113,7 @@ export class UserSettingsService {
   }
 
   set solarWatts(value: number) {
-    this.settings.solarWatts = value;
-    this.save();
+    this.updateValue('solarWatts', value);
   }
 
 
@@ -113,8 +122,7 @@ export class UserSettingsService {
   }
 
   set inverterEfficiency(value: number) {
-    this.settings.inverterEfficiency = value;
-    this.save();
+    this.updateValue('inverterEfficiency', value);
   }
 
   get inverterOutputVolts(): number {
@@ -122,7 +130,6 @@ export class UserSettingsService {
   }
 
   set inverterOutputVolts(value: number) {
-    this.settings.inverterOutputVolts = value;
-    this.save();
+    this.updateValue('inverterOutputVolts', value);
   }
 }

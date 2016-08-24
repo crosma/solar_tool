@@ -1,11 +1,6 @@
 <div class="row row-chart">
   <div class="col-md-12">
-    <app-main-chart
-      [batteryVoltsDC]="batteryVoltsDC"
-
-      [data]="chartData"
-      [batteryAmpHours]="batteryAmpHours"
-    ></app-main-chart>
+    <app-main-chart></app-main-chart>
   </div>
 </div>
 
@@ -27,20 +22,7 @@
   </div><!-- /.tabpanel -->
 
   <div role="tabpanel" class="tab-pane" id="options">
-    Battery: {{batteryVoltsDC}}<br>
-    <app-options
-      [(batteryVoltsDC)]="batteryVoltsDC"
-      [(batteryAmpHours)]="batteryAmpHours"
-      [(selectedBatteryIndex)]="selectedBatteryIndex"
-
-      [(solarVolts)]="solarVolts"
-      [(solarWatts)]="solarWatts"
-
-      [(inverterEfficiency)]="inverterEfficiency"
-      [(inverterOutputVolts)]="userData"
-
-      [(selectedBattery)]="selectedBattery"
-    ></app-options>
+    <app-options></app-options>
   </div><!-- /.tabpanel -->
 
   <div role="tabpanel" class="tab-pane" id="data">

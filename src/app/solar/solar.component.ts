@@ -18,18 +18,8 @@ import {OptionsComponent} from './options';
   directives: [MainChartComponent, ConsumersComponent, OptionsComponent],
   providers: [UserSettingsService, ConsumersService, BatteriesService],
 })
-export class SolarComponent implements OnInit, OnChanges {
+export class SolarComponent implements OnInit {
   consumers: Consumer[];
-
-  batteryVoltsDC = 12;
-  batteryAmpHours = 200;
-  selectedBatteryIndex = 0;
-
-  solarVolts = 12;
-  solarWatts = 300;
-
-  inverterEfficiency = 90;
-  inverterOutputVolts = 110;
 
   peakWattsAC = 0;
   peakWattsSurgeAC = 0;
@@ -49,13 +39,7 @@ export class SolarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.loadData();
-
     this.update();
-  }
-
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log('SolarComponent::changes', changes);
   }
 
   update() {
@@ -70,17 +54,17 @@ export class SolarComponent implements OnInit, OnChanges {
 
     for (let consumer of BasicConsumers) {
       if (consumer.currentAC) {
-        this.peakWattsAC += consumer.volts / this.inverterOutputVolts * consumer.watts * consumer.quantity;
+        this.peakWattsAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity;
 
-        this.peakWattsSurgeAC += consumer.volts / this.inverterOutputVolts * consumer.wattsSurge * consumer.quantity;
+        this.peakWattsSurgeAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.wattsSurge * consumer.quantity;
 
-        this.wattHoursAC += consumer.volts / this.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
+        this.wattHoursAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
 
       } else {
-        this.peakWattsDC += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity;
-        this.peakWattsSurgeAC += consumer.volts / this.batteryVoltsDC * consumer.wattsSurge * consumer.quantity;
+        this.peakWattsDC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity;
+        this.peakWattsSurgeAC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.wattsSurge * consumer.quantity;
 
-        this.wattHoursDC += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
+        this.wattHoursDC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
       }
     }
 
@@ -111,14 +95,14 @@ export class SolarComponent implements OnInit, OnChanges {
       23: 0,
     };
 
-    let currentBatteryAmps = this.batteryAmpHours;
+    let currentBatteryAmps = this.userSettingsService.batteryAmpHours;
     this.chartData = [];
 
     this.hours = [];
     for (let day = 1; day <= 3; day++) {
       for (var h = 0; h < 24; h++) {
         var hour: GraphPoint = {
-          createdAmps: this.solarWatts / this.solarVolts * solarHours[h],
+          createdAmps: this.userSettingsService.solarWatts / this.userSettingsService.solarVolts * solarHours[h],
           usedAmps: 0,
         };
 
@@ -127,13 +111,13 @@ export class SolarComponent implements OnInit, OnChanges {
           if (!consumer.getHour(h)) continue;
 
           if (consumer.currentAC) {
-            wattsAC += consumer.volts / this.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
+            wattsAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
           } else {
-            hour.usedAmps += consumer.volts / this.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.batteryVoltsDC;// * consumer.getHoursPerDay();
+            hour.usedAmps += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.userSettingsService.batteryVoltsDC;// * consumer.getHoursPerDay();
           }
         }
 
-        hour.usedAmps += wattsAC / this.batteryVoltsDC * (100 / this.inverterEfficiency);
+        hour.usedAmps += wattsAC / this.userSettingsService.batteryVoltsDC * (100 / this.userSettingsService.inverterEfficiency);
 
         this.hours.push(hour);
 
@@ -144,31 +128,20 @@ export class SolarComponent implements OnInit, OnChanges {
           hour.createdAmps,
           hour.usedAmps,
           currentBatteryAmps,
-          currentBatteryAmps < this.batteryAmpHours * 0.5 ? 'color: #FF0000' : '',
-          this.batteryAmpHours * 0.5,
+          currentBatteryAmps < this.userSettingsService.batteryAmpHours * 0.5 ? 'color: #FF0000' : '',
+          this.userSettingsService.batteryAmpHours * 0.5,
           false,
-          this.batteryAmpHours * 0.4,
+          this.userSettingsService.batteryAmpHours * 0.4,
           false,
-          this.batteryAmpHours * 0.3,
+          this.userSettingsService.batteryAmpHours * 0.3,
           false,
         ]);
 
         currentBatteryAmps -= hour.usedAmps;
         currentBatteryAmps += hour.createdAmps;
-        currentBatteryAmps = Math.max(Math.min(currentBatteryAmps, this.batteryAmpHours), 0);
+        currentBatteryAmps = Math.max(Math.min(currentBatteryAmps, this.userSettingsService.batteryAmpHours), 0);
       } // for h
     } // for day
-  }
-
-  doSomethingTimeout = null;
-
-  doSomething(newValue) {
-    this.doSomethingTimeout && clearTimeout(this.doSomethingTimeout);
-    this.doSomethingTimeout = setTimeout(() => {
-      this.update();
-
-      this.saveData();
-    }, 50);
   }
 
   hourToAmPm(hour) {
@@ -176,46 +149,6 @@ export class SolarComponent implements OnInit, OnChanges {
     else if (hour < 12) return `${hour}AM`;
     else if (hour == 12) return '12PM';
     else return `${hour - 12}PM`;
-  }
-
-  saveData() {
-    //TODO: Rewrite saveData;
-
-    /*
-    if (window.localStorage) {
-      window.localStorage['user_data'] = JSON.stringify(this.userData);
-    }
-    */
-  }
-
-  loadData() {
-    var userData = {
-      batteryVoltsDC: null,
-      batteryAmpHours: null,
-      selectedBatteryIndex: null,
-
-      solarVolts: null,
-      solarWatts: null,
-
-      inverterEfficiency: null,
-    };
-
-    //TODO: Rewrite loadData;
-    /*
-    if (window.localStorage) {
-      try {
-        var saved_data = JSON.parse(window.localStorage['user_data']);
-
-        Object.keys(saved_data).forEach((key) => {
-          if (this.userData[key]) this.userData[key] = saved_data[key];
-        });
-
-        this.selectedBattery = this.batteriesService.getBatteryTypes()[this.selectedBatteryIndex];
-      } catch (e) {
-        console.warn('Failed to load userData.', e);
-      }
-    }
-    */
   }
 }
 

@@ -10,7 +10,7 @@
         <th style="vertical-align: middle;">Voltage</th>
         <td style="width: 250px;">
           <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="batteryVoltsDC" (ngModelChange)="updateBatteryVoltsDC($event)">
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.batteryVoltsDC">
             <div class="input-group-addon">V DC</div>
           </div>
         </td>
@@ -19,7 +19,7 @@
         <th style="vertical-align: middle;">Amp Hours</th>
         <td>
           <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="batteryAmpHours" (ngModelChange)="updateBatteryAmpHours($event)">
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.batteryAmpHours">
             <div class="input-group-addon">Ah</div>
           </div>
         </td>
@@ -27,7 +27,7 @@
       <tr>
         <th style="vertical-align: middle;">Battery Type</th>
         <td>
-          <select [(ngModel)]="selectedBatteryIndex" class="form-control" (ngModelChange)="updateSelectedBattery($event)">
+          <select [(ngModel)]="userSettingsService.batteryIndex" class="form-control">
             <option *ngFor="let battery of batteryTypes; let i = index" [value]="i">
               {{ battery.name }}
             </option>
@@ -47,7 +47,7 @@
         <th style="vertical-align: middle;">Voltage</th>
         <td style="width: 155px;">
           <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="solarVolts" (ngModelChange)="updateSolarVolts($event)">
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.solarVolts">
             <div class="input-group-addon">V DC</div>
           </div>
         </td>
@@ -56,7 +56,7 @@
         <th style="vertical-align: middle;">Watts</th>
         <td>
           <div class="input-group">
-            <input type="number" min="0" step="100" class="form-control" [(ngModel)]="solarWatts" (ngModelChange)="updateSolarWatts($event)">
+            <input type="number" min="0" step="100" class="form-control" [(ngModel)]="userSettingsService.solarWatts">
             <div class="input-group-addon">W</div>
           </div>
         </td>
@@ -71,7 +71,7 @@
         <th style="vertical-align: middle;">Efficiency</th>
         <td style="width: 155px;">
           <div class="input-group">
-            <input type="number" min="1" max="100" class="form-control" [(ngModel)]="inverterEfficiency" (ngModelChange)="updateInverterEfficiency($event)">
+            <input type="number" min="1" max="100" class="form-control" [(ngModel)]="userSettingsService.inverterEfficiency">
             <div class="input-group-addon">%</div>
           </div>
         </td>
@@ -80,7 +80,7 @@
         <th style="vertical-align: middle;">Output Voltage</th>
         <td style="width: 155px;">
           <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="inverterOutputVolts" (ngModelChange)="updateInverterOutputVolts($event)">
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.inverterOutputVolts">
             <div class="input-group-addon">V</div>
           </div>
         </td>
