@@ -1,7 +1,7 @@
 
 # Solar Tool
 
-A tool to visualize solar power generation and consumption.
+A tool to visualize solar power generation and consumption. Hosted using Github Pages @ https://crosma.github.io/solar_tool/
 
 ### Working with this repo
 
