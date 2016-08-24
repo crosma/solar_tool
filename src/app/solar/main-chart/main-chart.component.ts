@@ -9,6 +9,7 @@ declare var google: any;
   styleUrls: ['main-chart.component.scss']
 })
 export class MainChartComponent implements OnInit, OnChanges {
+  @Input() batteryVoltsDC = null;
   @Input() data = null;
   @Input() batteryAmpHours: number = 0;
 
