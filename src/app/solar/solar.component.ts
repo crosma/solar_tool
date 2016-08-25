@@ -1,10 +1,7 @@
 import {Component, OnInit, OnChanges, SimpleChange} from '@angular/core';
 
 //data
-import {Battery, BatteriesService} from '../services';
-import {ConsumersService} from '../services';
-import {Consumer} from '../services/consumers'
-import {UserSettingsService} from '../services/user-settings.service'
+import {Battery, BatteriesService, ConsumersService, UserSettingsService} from '../services';
 
 //components
 import {MainChartComponent} from './main-chart';
@@ -16,10 +13,10 @@ import {OptionsComponent} from './options';
   templateUrl: 'solar.component.html',
   styleUrls: ['solar.component.scss'],
   directives: [MainChartComponent, ConsumersComponent, OptionsComponent],
-  providers: [UserSettingsService, ConsumersService, BatteriesService],
+  providers: [ConsumersService, BatteriesService, UserSettingsService],
 })
 export class SolarComponent implements OnInit {
-  consumers: Consumer[];
+  consumers;
 
   peakWattsAC = 0;
   peakWattsSurgeAC = 0;
@@ -49,7 +46,10 @@ export class SolarComponent implements OnInit {
 
     this.wattHoursDC = 0;
 
-    for (let consumer of this.consumerService.getConsumers()) {
+    let consumers = this.consumerService.getConsumers();
+    for (var consumer_key in consumers) {
+      let consumer = consumers[consumer_key];
+
       if (consumer.currentAC) {
         this.peakWattsAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity;
 

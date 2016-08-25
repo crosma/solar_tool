@@ -1,4 +1,3 @@
-
 //http://www.rapidtables.com/calc/electric/watt-volt-amp-calculator.htm
 
 export declare type ConsumerDefinitions = ConsumerDefinition[];
@@ -39,7 +38,6 @@ export class Consumer {
   public  dutyCycle: number = 1; //percent in decimal 0-1
   public  requirePureSine: boolean = false;
   public  hours: number[] = []; //array 0-23, boolean
-
   public quantity: number = 0;
 
   constructor(def: ConsumerDefinition) {

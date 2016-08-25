@@ -1,5 +1,6 @@
 import {Injectable, Inject} from '@angular/core';
-import {Battery, Batteries, BatteriesService} from '../services';
+import {BatteriesService} from '../services/batteries.service';
+import {Battery, Batteries} from '../services';
 import {Subject} from 'rxjs/Subject';
 
 interface SettingUpdate {
@@ -19,6 +20,8 @@ export class UserSettingsService {
 
     inverterEfficiency: 90,
     inverterOutputVolts: 110,
+
+    consumerQuantities: {}
   };
 
   private settingsChangedSource = new Subject<SettingUpdate>();
@@ -30,13 +33,28 @@ export class UserSettingsService {
     this.load();
   }
 
+  public getConsumerQuantityByName(name:string, def:number) {
+    var qty = this.settings.consumerQuantities[name];
+    return qty === undefined ? def : qty;
+  }
+
+  public setConsumerQuantityByName(name:string, qty:number): void {
+    if (this.settings.consumerQuantities[name] !== qty) { //only update if changed
+      this.settings.consumerQuantities[name] = qty;
+
+      this.settingsChangedSource.next({key: 'consumerQuantities', val: this.settingsChangedSource}); //fire event
+
+      this.save(); //save settings
+    }
+  }
+
   private load() {
     if (window.localStorage) {
       try {
         var saved_data = JSON.parse(window.localStorage['user_data']);
 
         Object.keys(saved_data).forEach((key) => {
-          if (this.settings[key]) this.settings[key] = saved_data[key];
+          if (key in this.settings) this.settings[key] = saved_data[key];
         });
 
         this._battery = this.batteriesService.getBatteryTypes()[this.batteryIndex];
@@ -53,12 +71,12 @@ export class UserSettingsService {
     }
   }
 
-  private updateValue(key:string, val:any) {
+  private updateValue(key: string, val: any) {
     if (this.settings[key] !== val) { //only update if changed
       console.log('user settings changed');
 
       this.settings[key] = val; //store value
-      this.settingsChangedSource.next({key, val}); //fire event
+      this.settingsChangedSource.next({key: key, val: val}); //fire event
 
       this.save(); //save settings
     }
@@ -86,12 +104,14 @@ export class UserSettingsService {
 
   set batteryIndex(value: number) {
     this._battery = this.batteriesService.getBatteryTypes()[value];
+    console.log('batteryIndex', value);
     this.updateValue('batteryIndex', value);
   }
 
   get battery(): Battery {
     return this._battery;
   }
+
   /*
    set battery(value: Battery) {
    this._battery = value;

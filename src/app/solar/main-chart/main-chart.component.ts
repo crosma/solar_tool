@@ -1,8 +1,5 @@
 import {Component, Input, OnInit, ElementRef} from '@angular/core';
-import {Battery, BatteriesService} from '../../services';
-import {ConsumersService} from '../../services';
-import {Consumer} from '../../services/consumers'
-import {UserSettingsService} from '../../services/user-settings.service'
+import {BatteriesService, ConsumersService, UserSettingsService} from '../../services';
 
 declare var google: any;
 
@@ -12,10 +9,7 @@ declare var google: any;
   styleUrls: ['main-chart.component.scss']
 })
 export class MainChartComponent implements OnInit {
-  //private userSettingsService: UserSettingsService;
-
   chartHasLoaded = false;
-  updateGraphTimeout = null;
   containerElement = null;
   myElement = null;
 
@@ -24,7 +18,6 @@ export class MainChartComponent implements OnInit {
 
     this.myElement = myElement;
 
-    //this.userSettingsService = userSettingsService;
     userSettingsService.settingsChanged$.subscribe(() => {
       this.updateGraph();
     });
@@ -75,6 +68,7 @@ export class MainChartComponent implements OnInit {
     let currentBatteryAmps = this.userSettingsService.batteryAmpHours;
     let chartData = [];
     let hours: GraphPoints = [];
+    var qty;
 
     for (let day = 1; day <= 3; day++) {
       for (var h = 0; h < 24; h++) {
@@ -86,11 +80,12 @@ export class MainChartComponent implements OnInit {
         let wattsAC = 0;
         for (let consumer of this.consumerService.getConsumers()) {
           if (!consumer.getHour(h)) continue;
+          var qty = this.userSettingsService.getConsumerQuantityByName(consumer.name, consumer.quantity);
 
           if (consumer.currentAC) {
-            wattsAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle;// * consumer.getHoursPerDay();
+            wattsAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * qty * consumer.dutyCycle;// * consumer.getHoursPerDay();
           } else {
-            hour.usedAmps += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle / this.userSettingsService.batteryVoltsDC;// * consumer.getHoursPerDay();
+            hour.usedAmps += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * qty * consumer.dutyCycle / this.userSettingsService.batteryVoltsDC;// * consumer.getHoursPerDay();
           }
         }
 

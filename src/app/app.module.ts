@@ -13,6 +13,9 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 //directives
 import {BootstrapTab} from './directives/bootstrap-tab.directive';
 
+//services
+import {BatteriesService, ConsumersService, UserSettingsService} from './services';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +32,8 @@ import {BootstrapTab} from './directives/bootstrap-tab.directive';
   ],
   providers: [
     appRoutingProviders,
+    BatteriesService,
+    ConsumersService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

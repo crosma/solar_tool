@@ -1,6 +1,5 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Battery, Batteries, BatteriesService} from '../../services';
-import {UserSettingsService} from '../../services/user-settings.service'
+import {Component, OnInit} from '@angular/core';
+import {Batteries, BatteriesService, UserSettingsService} from '../../services';
 
 @Component({
   selector: 'app-options',
@@ -8,17 +7,11 @@ import {UserSettingsService} from '../../services/user-settings.service'
   styleUrls: ['options.component.scss'],
   providers: [BatteriesService],
 })
-export class OptionsComponent implements OnInit {
+export class OptionsComponent {
   batteryTypes: Batteries;
 
-  private userSettingsService: UserSettingsService;
-
-  constructor(userSettingsService: UserSettingsService, private batteriesService: BatteriesService) {
+  constructor(private userSettingsService: UserSettingsService, private batteriesService: BatteriesService) {
     this.batteryTypes = batteriesService.getBatteryTypes();
     this.userSettingsService = userSettingsService;
-  }
-
-  ngOnInit() {
-    console.log('OptionsComponent::ngOnInit');
   }
 }
