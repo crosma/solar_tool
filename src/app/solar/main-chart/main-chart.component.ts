@@ -67,13 +67,14 @@ export class MainChartComponent implements OnInit {
 
     let inverterRatio = 100 / this.userSettingsService.inverterEfficiency;
     let currentBatteryAmps = this.userSettingsService.batteryAmpHours;
+    let solarEfficiency = this.userSettingsService.solarEfficiency / 100;
     let chartData = [];
     var qty;
 
     for (let day = 1; day <= 3; day++) {
       for (var h = 0; h < 24; h++) {
         var hour: GraphPoint = {
-          createdAmps: this.userSettingsService.solarWatts / this.userSettingsService.solarVolts * solarHours[h],
+          createdAmps: this.userSettingsService.solarWatts / this.userSettingsService.solarVolts * solarHours[h] * solarEfficiency,
           usedAmps: 0,
         };
 

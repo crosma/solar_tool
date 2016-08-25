@@ -17,6 +17,7 @@ export class UserSettingsService {
 
     solarVolts: 12,
     solarWatts: 300,
+    solarEfficiency: 75,
 
     inverterEfficiency: 90,
     inverterOutputVolts: 110,
@@ -134,6 +135,14 @@ export class UserSettingsService {
 
   set solarWatts(value: number) {
     this.updateValue('solarWatts', value);
+  }
+
+  get solarEfficiency(): number {
+    return this.settings.solarEfficiency;
+  }
+
+  set solarEfficiency(value: number) {
+    this.updateValue('solarEfficiency', value);
   }
 
 
