@@ -24,7 +24,7 @@ export class MainChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    var div = this.myElement.nativeElement.getElementsByTagName("div");
+    var div = this.myElement.nativeElement.getElementsByClassName("chart");
     this.containerElement = div[0];
 
     this.updateGraph();
@@ -181,21 +181,21 @@ export class MainChartComponent implements OnInit {
           type: 'line',
           visibleInLegend: true,
           color: '#cccc00',
-          lineWidth: 2,
+          lineWidth:  this.userSettingsService.battery.minimumLevel ? 2 : 0,
           lineDashStyle: [4, 4],
         },
         4: {
           type: 'line',
           visibleInLegend: false,
           color: '#cc8500',
-          lineWidth: 2,
+          lineWidth: this.userSettingsService.battery.warningLevel ? 2 : 0,
           lineDashStyle: [4, 4],
         },
         5: {
           type: 'line',
           visibleInLegend: false,
           color: '#cc0000',
-          lineWidth: 2,
+          lineWidth: this.userSettingsService.battery.dangerLevel ? 2 : 0,
           lineDashStyle: [4, 4],
         },
       },
