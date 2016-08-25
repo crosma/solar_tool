@@ -14,6 +14,8 @@ export class UserSettingsService {
     batteryVoltsDC: 12,
     batteryAmpHours: 200,
     batteryIndex: 0,
+    batteryDischargeAmps: 5,
+    batteryDischargeHours: 20,
 
     solarVolts: 12,
     solarWatts: 300,
@@ -112,12 +114,22 @@ export class UserSettingsService {
     return this._battery;
   }
 
-  /*
-   set battery(value: Battery) {
-   this._battery = value;
-   this.save();
-   }
-   */
+  set batteryDischargeAmps(value: number) {
+    this.updateValue('batteryDischargeAmps', value);
+  }
+
+  get batteryDischargeAmps(): number {
+    return this.settings.batteryDischargeAmps;
+  }
+
+  set batteryDischargeHours(value: number) {
+    this.updateValue('batteryDischargeHours', value);
+  }
+
+  get batteryDischargeHours(): number {
+    return this.settings.batteryDischargeHours;
+  }
+
 
 
   get solarVolts(): number {
@@ -143,6 +155,7 @@ export class UserSettingsService {
   set solarEfficiency(value: number) {
     this.updateValue('solarEfficiency', value);
   }
+
 
 
   get inverterEfficiency(): number {

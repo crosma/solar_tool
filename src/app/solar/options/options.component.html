@@ -8,7 +8,7 @@
     <tbody>
       <tr>
         <th style="vertical-align: middle;">Voltage</th>
-        <td style="width: 250px;">
+        <td style="width: 320px;">
           <div class="input-group">
             <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.batteryVoltsDC">
             <div class="input-group-addon">V DC</div>
@@ -32,6 +32,17 @@
               {{ battery.name }}
             </option>
           </select>
+        </td>
+      </tr>
+      <tr>
+        <th style="vertical-align: middle;">Discharge Rate</th>
+        <td>
+          <div class="input-group">
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.batteryDischargeAmps">
+            <div class="input-group-addon" style="border-width: 1px 0">Amps @</div>
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.batteryDischargeHours">
+            <div class="input-group-addon">Hours</div>
+          </div>
         </td>
       </tr>
     </tbody>
@@ -90,7 +101,7 @@
       </tr>
       <tr>
         <th style="vertical-align: middle;">Nominal Efficiency</th>
-        <td style="width: 155px;">
+        <td>
           <div class="input-group">
             <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.solarEfficiency">
             <div class="input-group-addon">%</div>
