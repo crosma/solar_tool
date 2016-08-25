@@ -48,7 +48,7 @@ export class Consumer {
     }
 
     if (this.dutyCycleByHour.length > 0 && this.dutyCycleByHour.length < 24) throw new Error(`Invalid number of hours for consumer ${this.name}.`);
-    if (this.dutyCycleByHour) {
+    if (this.dutyCycleByHour.length) {
       this.dutyCycle = 0;
       for (var h = 0; h <= 23; h++) {
         this.dutyCycle += this.dutyCycleByHour[h];

@@ -65,6 +65,7 @@ export class MainChartComponent implements OnInit {
       23: 0,
     };
 
+    let inverterRatio = 100 / this.userSettingsService.inverterEfficiency;
     let currentBatteryAmps = this.userSettingsService.batteryAmpHours;
     let chartData = [];
     var qty;
@@ -84,18 +85,14 @@ export class MainChartComponent implements OnInit {
           let qty = this.userSettingsService.getConsumerQuantityByName(consumer.name, consumer.quantity);
           let total_watts = consumer.watts * qty * dutyCycle;
 
-          console.log(day, h, consumer.name, consumer.watts, qty, consumer.getDutyCycleByHour(h));
+          //console.log(day, h, consumer.name, consumer.watts, qty, consumer.getDutyCycleByHour(h));
 
           if (consumer.currentAC) {
-            wattsAC += total_watts * (this.userSettingsService.inverterOutputVolts / consumer.volts);
+            hour.usedAmps += total_watts / this.userSettingsService.batteryVoltsDC * inverterRatio;
           } else {
-            hour.usedAmps += total_watts * (this.userSettingsService.batteryVoltsDC / consumer.volts) / this.userSettingsService.batteryVoltsDC;
-
-            //console.log(consumer.name, total_watts, (this.userSettingsService.batteryVoltsDC / consumer.volts), this.userSettingsService.batteryVoltsDC);
+            hour.usedAmps += total_watts / this.userSettingsService.batteryVoltsDC;
           }
         }
-
-        hour.usedAmps += wattsAC / this.userSettingsService.inverterOutputVolts * (this.userSettingsService.inverterOutputVolts / this.userSettingsService.batteryVoltsDC) * (100 / this.userSettingsService.inverterEfficiency);
 
         //todo pass the dutyCycleHours array to the chart, build chartData in chart code
         chartData.push([
