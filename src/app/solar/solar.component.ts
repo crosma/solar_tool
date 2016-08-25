@@ -55,13 +55,13 @@ export class SolarComponent implements OnInit {
 
         this.peakWattsSurgeAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.wattsSurge * consumer.quantity;
 
-        this.wattHoursAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
+        this.wattHoursAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * consumer.quantity * consumer.dutyCycle;
 
       } else {
         this.peakWattsDC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity;
         this.peakWattsSurgeAC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.wattsSurge * consumer.quantity;
 
-        this.wattHoursDC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle * consumer.getHoursPerDay();
+        this.wattHoursDC += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * consumer.quantity * consumer.dutyCycle;
       }
     }
   }

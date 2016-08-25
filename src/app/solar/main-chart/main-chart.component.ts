@@ -67,7 +67,6 @@ export class MainChartComponent implements OnInit {
 
     let currentBatteryAmps = this.userSettingsService.batteryAmpHours;
     let chartData = [];
-    let hours: GraphPoints = [];
     var qty;
 
     for (let day = 1; day <= 3; day++) {
@@ -79,34 +78,39 @@ export class MainChartComponent implements OnInit {
 
         let wattsAC = 0;
         for (let consumer of this.consumerService.getConsumers()) {
-          if (!consumer.getHour(h)) continue;
-          var qty = this.userSettingsService.getConsumerQuantityByName(consumer.name, consumer.quantity);
+          let dutyCycle = consumer.getDutyCycleByHour(h);
+          if (!dutyCycle) continue;
+
+          let qty = this.userSettingsService.getConsumerQuantityByName(consumer.name, consumer.quantity);
+          let total_watts = consumer.watts * qty * dutyCycle;
+
+          console.log(day, h, consumer.name, consumer.watts, qty, consumer.getDutyCycleByHour(h));
 
           if (consumer.currentAC) {
-            wattsAC += consumer.volts / this.userSettingsService.inverterOutputVolts * consumer.watts * qty * consumer.dutyCycle;// * consumer.getHoursPerDay();
+            wattsAC += total_watts * (this.userSettingsService.inverterOutputVolts / consumer.volts);
           } else {
-            hour.usedAmps += consumer.volts / this.userSettingsService.batteryVoltsDC * consumer.watts * qty * consumer.dutyCycle / this.userSettingsService.batteryVoltsDC;// * consumer.getHoursPerDay();
+            hour.usedAmps += total_watts * (this.userSettingsService.batteryVoltsDC / consumer.volts) / this.userSettingsService.batteryVoltsDC;
+
+            //console.log(consumer.name, total_watts, (this.userSettingsService.batteryVoltsDC / consumer.volts), this.userSettingsService.batteryVoltsDC);
           }
         }
 
-        hour.usedAmps += wattsAC / this.userSettingsService.batteryVoltsDC * (100 / this.userSettingsService.inverterEfficiency);
+        hour.usedAmps += wattsAC / this.userSettingsService.inverterOutputVolts * (this.userSettingsService.inverterOutputVolts / this.userSettingsService.batteryVoltsDC) * (100 / this.userSettingsService.inverterEfficiency);
 
-        hours.push(hour);
-
-        //todo pass the hours array to the chart, build chartData in chart code
+        //todo pass the dutyCycleHours array to the chart, build chartData in chart code
         chartData.push([
           {v: (day - 1) * 24 + h, f: `Day ${day}, Hour ${this.hourToAmPm(h)}`},
           //`Day ${day}, Hour ${this.hourToAmPm(h)}`,
           hour.createdAmps,
           hour.usedAmps,
           currentBatteryAmps,
-          currentBatteryAmps < this.userSettingsService.batteryAmpHours * 0.5 ? 'color: #FF0000' : '',
+          currentBatteryAmps < this.userSettingsService.batteryAmpHours * 0.5 ? 'color: #FF0000' : '', //color line if dips too low
           this.userSettingsService.batteryAmpHours * 0.5,
-          false,
+          false, //certainty (makes line dashed)
           this.userSettingsService.batteryAmpHours * 0.4,
-          false,
+          false, //certainty (makes line dashed)
           this.userSettingsService.batteryAmpHours * 0.3,
-          false,
+          false, //certainty (makes line dashed)
         ]);
 
         currentBatteryAmps -= hour.usedAmps;

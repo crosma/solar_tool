@@ -16,7 +16,7 @@ export interface ConsumerDefinition {
   ampsSurge?: number;
   dutyCycle?: number; //percent in decimal 0-1
   requirePureSine?: boolean;
-  hours?: number[]; //array 0-23, boolean
+  dutyCycleByHour?: number[]; //array 0-23, boolean
 
   quantity?: number;
 }
@@ -35,9 +35,9 @@ export class Consumer {
   public  wattsSurge: number = 0;
   public  amps: number = 0;
   public  ampsSurge: number = 0;
-  public  dutyCycle: number = 1; //percent in decimal 0-1
+  public  dutyCycle: number = 1; //percent in decimal 0-1, if dutyCycleByHour, this will be the average of the hours
   public  requirePureSine: boolean = false;
-  public  hours: number[] = []; //array 0-23, boolean
+  public  dutyCycleByHour: number[] = []; //array 0-23, boolean
   public quantity: number = 0;
 
   constructor(def: ConsumerDefinition) {
@@ -45,6 +45,15 @@ export class Consumer {
       if (!def.hasOwnProperty(prop)) continue;
 
       this[prop] = def[prop];
+    }
+
+    if (this.dutyCycleByHour.length > 0 && this.dutyCycleByHour.length < 24) throw new Error(`Invalid number of hours for consumer ${this.name}.`);
+    if (this.dutyCycleByHour) {
+      this.dutyCycle = 0;
+      for (var h = 0; h <= 23; h++) {
+        this.dutyCycle += this.dutyCycleByHour[h];
+      }
+      this.dutyCycle /= 24;
     }
 
     if (def.watts && def.volts) { //The current I in amps (A) is equal to the power P in watts (W) divided by the voltage V in volts (V)
@@ -60,12 +69,12 @@ export class Consumer {
     }
   }
 
-  getHoursPerDay(): number {
-    return this.hours.length > 0 ? this.hours.length : 24;
-  }
-
-  getHour(hour): boolean {
-    return this.hours.length <= 0 || this.hours.indexOf(hour) >= 0;
+  getDutyCycleByHour(hour): number {
+    if (this.dutyCycleByHour.length) {
+      return this.dutyCycleByHour[hour];
+    } else {
+      return this.dutyCycle;
+    }
   }
 }
 
