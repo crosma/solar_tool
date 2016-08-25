@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ElementRef} from '@angular/core';
-import {BatteriesService, ConsumersService, UserSettingsService} from '../../services';
+import {Battery, BatteriesService, ConsumersService, UserSettingsService} from '../../services';
 
 declare var google: any;
 
@@ -66,7 +66,7 @@ export class MainChartComponent implements OnInit {
     };
 
     let inverterRatio = 100 / this.userSettingsService.inverterEfficiency;
-    let currentBatteryAmps = this.userSettingsService.batteryAmpHours;
+    let currentBatteryAmps = this.userSettingsService.batteryAmpHours; //start at 100% battery charge
     let solarEfficiency = this.userSettingsService.solarEfficiency / 100;
     let chartData = [];
     var qty;
@@ -101,13 +101,10 @@ export class MainChartComponent implements OnInit {
           hour.createdAmps,
           hour.usedAmps,
           currentBatteryAmps,
-          currentBatteryAmps < this.userSettingsService.batteryAmpHours * 0.5 ? 'color: #FF0000' : '', //color line if dips too low
-          this.userSettingsService.batteryAmpHours * 0.5,
-          false, //certainty (makes line dashed)
-          this.userSettingsService.batteryAmpHours * 0.4,
-          false, //certainty (makes line dashed)
-          this.userSettingsService.batteryAmpHours * 0.3,
-          false, //certainty (makes line dashed)
+          this.batteryChargeColor(this.userSettingsService.battery, currentBatteryAmps / this.userSettingsService.batteryAmpHours * 100), //color line if dips too low
+          this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.minimumLevel / 100,
+          this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.warningLevel / 100,
+          this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.dangerLevel / 100,
         ]);
 
         currentBatteryAmps -= hour.usedAmps;
@@ -126,15 +123,8 @@ export class MainChartComponent implements OnInit {
     data.addColumn({'type': 'string', 'role': 'style'});
 
     data.addColumn('number', 'Battery Safe Minimum');
-    data.addColumn({type: 'boolean', role: 'certainty'});
-
     data.addColumn('number', 'Battery Warning Minimum');
-    data.addColumn({type: 'boolean', role: 'certainty'});
-
     data.addColumn('number', 'Battery Danger Minimum');
-    data.addColumn({type: 'boolean', role: 'certainty'});
-    //user_data.addColumn({type:'number', role: 'interval'});
-    //user_data.addColumn('number', 'Expenses');
 
     data.addRows(chartData);
 
@@ -150,8 +140,8 @@ export class MainChartComponent implements OnInit {
       suffix: 'Ah'
     });
     formatAhNoDigits.format(data, 5);
+    formatAhNoDigits.format(data, 6);
     formatAhNoDigits.format(data, 7);
-    formatAhNoDigits.format(data, 9);
 
     var chart = new google.visualization.ComboChart(this.containerElement);
     chart.draw(data, {
@@ -169,8 +159,8 @@ export class MainChartComponent implements OnInit {
         title: 'Amp Hours',
         viewWindowMode: 'explicit',
         viewWindow: {
-          max: this.userSettingsService.batteryAmpHours,
-          min: 0
+          max: this.userSettingsService.batteryAmpHours * 1.03,
+          min: this.userSettingsService.batteryAmpHours * -0.03
         }
       },
       hAxis: {
@@ -183,10 +173,31 @@ export class MainChartComponent implements OnInit {
       },
       seriesType: 'bars',
       series: {
-        2: {type: 'line'},
-        3: {type: 'line', visibleInLegend: false},
-        4: {type: 'line', visibleInLegend: false},
-        5: {type: 'line', visibleInLegend: false},
+        2: {
+          type: 'line',
+          color: '#32CD32'
+        },
+        3: {
+          type: 'line',
+          visibleInLegend: true,
+          color: '#cccc00',
+          lineWidth: 2,
+          lineDashStyle: [4, 4],
+        },
+        4: {
+          type: 'line',
+          visibleInLegend: false,
+          color: '#cc8500',
+          lineWidth: 2,
+          lineDashStyle: [4, 4],
+        },
+        5: {
+          type: 'line',
+          visibleInLegend: false,
+          color: '#cc0000',
+          lineWidth: 2,
+          lineDashStyle: [4, 4],
+        },
       },
     });
   }
@@ -197,8 +208,14 @@ export class MainChartComponent implements OnInit {
     else if (hour == 12) return '12PM';
     else return `${hour - 12}PM`;
   }
-}
 
+  batteryChargeColor(battery: Battery, charge) {
+    if (charge <= battery.dangerLevel) return '#cc0000';
+    else if (charge <= battery.warningLevel) return '#cc8500';
+    else if (charge <= battery.minimumLevel) return '#cccc00';
+    else return 'green';
+  }
+}
 
 //TODO: Move these?
 export interface GraphPoint {

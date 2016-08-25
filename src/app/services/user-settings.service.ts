@@ -57,12 +57,12 @@ export class UserSettingsService {
         Object.keys(saved_data).forEach((key) => {
           if (key in this.settings) this.settings[key] = saved_data[key];
         });
-
-        this._battery = this.batteriesService.getBatteryTypes()[this.batteryIndex];
       } catch (e) {
         console.warn('Failed to load userData.', e);
       }
     }
+
+    this._battery = this.batteriesService.getBatteryTypes()[this.batteryIndex];
   }
 
   //TODO: Debounce this function
@@ -105,7 +105,6 @@ export class UserSettingsService {
 
   set batteryIndex(value: number) {
     this._battery = this.batteriesService.getBatteryTypes()[value];
-    console.log('batteryIndex', value);
     this.updateValue('batteryIndex', value);
   }
 
