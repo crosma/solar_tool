@@ -18,7 +18,7 @@
     <tbody>
       <tr *ngFor="let consumer of consumers">
         <td style="width: 80px;">
-          <input type="number" maxlength="2" min="0" class="form-control" [(ngModel)]="consumer.quantity">
+          <input type="number" maxlength="2" min="0" class="form-control" value="{{ getQuantity(consumer) }}" (change)="setQuantity(consumer, $event)">
         </td>
         <td>
           <div>{{ consumer.name }}</div>
