@@ -77,7 +77,6 @@ export class MainChartComponent implements OnInit {
           usedAmps: 0,
         };
 
-        let wattsAC = 0;
         for (let consumer of this.consumerService.getConsumers()) {
           let dutyCycle = consumer.getDutyCycleByHour(h);
           if (!dutyCycle) continue;

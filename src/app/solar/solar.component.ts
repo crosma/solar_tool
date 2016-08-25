@@ -7,12 +7,14 @@ import {Battery, BatteriesService, ConsumersService, UserSettingsService} from '
 import {MainChartComponent} from './main-chart';
 import {ConsumersComponent} from './consumers';
 import {OptionsComponent} from './options';
+import {DataComponent} from './data';
+
 
 @Component({
   selector: 'app-solar',
   templateUrl: 'solar.component.html',
   styleUrls: ['solar.component.scss'],
-  directives: [MainChartComponent, ConsumersComponent, OptionsComponent],
+  directives: [MainChartComponent, DataComponent, ConsumersComponent, OptionsComponent],
   providers: [ConsumersService, BatteriesService, UserSettingsService],
 })
 export class SolarComponent implements OnInit {

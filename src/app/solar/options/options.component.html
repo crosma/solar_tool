@@ -38,6 +38,33 @@
     </table>
 
     <table class="table table-striped table-bordered table-condensed">
+    <caption><h4>Inverter</h4></caption>
+    <tbody>
+      <tr>
+        <th style="vertical-align: middle;">Efficiency</th>
+        <td style="width: 155px;">
+          <div class="input-group">
+            <input type="number" min="1" max="100" class="form-control" [(ngModel)]="userSettingsService.inverterEfficiency">
+            <div class="input-group-addon">%</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th style="vertical-align: middle;">Output Voltage</th>
+        <td style="width: 155px;">
+          <div class="input-group">
+            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.inverterOutputVolts">
+            <div class="input-group-addon">V</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+
+  </div>
+  <div class="col-md-6">
+
+    <table class="table table-striped table-bordered table-condensed">
     <caption>
       <h4>Solar</h4>
       <small>This tool assumes that your solar controller will step the panel voltage to your batteries voltage.</small>
@@ -58,30 +85,6 @@
           <div class="input-group">
             <input type="number" min="0" step="100" class="form-control" [(ngModel)]="userSettingsService.solarWatts">
             <div class="input-group-addon">W</div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    </table>
-
-    <table class="table table-striped table-bordered table-condensed">
-    <caption><h4>Inverter</h4></caption>
-    <tbody>
-      <tr>
-        <th style="vertical-align: middle;">Efficiency</th>
-        <td style="width: 155px;">
-          <div class="input-group">
-            <input type="number" min="1" max="100" class="form-control" [(ngModel)]="userSettingsService.inverterEfficiency">
-            <div class="input-group-addon">%</div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th style="vertical-align: middle;">Output Voltage</th>
-        <td style="width: 155px;">
-          <div class="input-group">
-            <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.inverterOutputVolts">
-            <div class="input-group-addon">V</div>
           </div>
         </td>
       </tr>

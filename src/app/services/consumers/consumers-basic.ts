@@ -56,6 +56,8 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
     ampsSurge: 9,
     volts: 110,
 
+    quantity: 0,
+
     dutyCycle: 0.33, //20 minutes an hour
     dutyCycleByHour: [
       /*00*/ 0,
@@ -83,8 +85,6 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
       /*22*/ 0,
       /*23*/ 0,
     ], //runs 9am to 9pm
-
-    quantity: 1,
   },
 ];
 

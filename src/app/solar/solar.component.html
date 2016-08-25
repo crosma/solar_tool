@@ -4,7 +4,6 @@
   </div>
 </div>
 
-
 <ul bootstrapTabs class="nav nav-tabs" role="tablist">
   <li role="presentation" class="active">
     <a bootstrapTab="tab_group" href="#consumers" aria-controls="consumers" role="tab" data-toggle="consumers">Consumers</a>
@@ -26,67 +25,6 @@
   </div><!-- /.tabpanel -->
 
   <div role="tabpanel" class="tab-pane" id="data">
-    <div class="row">
-      <div class="col-md-6">
-
-        <table class="table table-striped table-bordered table-condensed">
-        <caption>{{ targetVoltsAC }}V AC Needs</caption>
-        <tbody>
-          <tr>
-            <th>Peak Watts Required</th>
-            <td>{{ peakWattsAC | number:'1.1-1' }}W</td>
-          </tr>
-          <tr>
-            <th>Peak Amps Required</th>
-            <td>{{ peakWattsAC / targetVoltsAC | number:'1.1-1' }}A</td>
-          </tr>
-
-          <tr>
-            <th>Peak Surge Watts Required</th>
-            <td>{{ peakWattsSurgeAC | number:'1.1-1' }}W</td>
-          </tr>
-          <tr>
-            <th>Peak Surge Amps Required</th>
-            <td>{{ peakWattsSurgeAC / targetVoltsAC | number:'1.1-1' }}A</td>
-          </tr>
-        </tbody>
-        </table>
-
-        <table class="table table-striped table-bordered table-condensed">
-        <caption>{{ batteryVoltsDC }}V DC Needs</caption>
-        <tbody>
-          <tr>
-            <th>Peak Watts Required By DC Consumers</th>
-            <td>{{ peakWattsDC | number:'1.1-1' }}W</td>
-          </tr>
-          <tr>
-            <th>Peak Amps Required By DC Consumers</th>
-            <td>{{ peakWattsDC / batteryVoltsDC | number:'1.1-1' }}A</td>
-          </tr>
-          <tr>
-            <th>Amp Hours Consumed By DC Consumers</th>
-            <td>{{ wattHoursDC / 12 | number:'1.1-1' }}Ah</td>
-          </tr>
-
-          <tr>
-            <th>Peak Amps Used By Inverter</th>
-            <td>{{ peakWattsAC / 12 * (100 / inverterEfficiency) | number:'1.1-1' }}A</td>
-          </tr>
-
-          <tr>
-            <th>Amp Hours Consumed By Inverter</th>
-            <td>{{ wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency) | number:'1.1-1' }}Ah</td>
-          </tr>
-
-          <tr>
-            <th>Total Amp Hours Consumed</th>
-            <td>{{ (wattHoursAC / batteryVoltsDC * (100 / inverterEfficiency)) + (wattHoursDC / 12) | number:'1.1-1' }}Ah</td>
-          </tr>
-        </tbody>
-        </table>
-
-      </div>
-    </div>
-
+    <app-data></app-data>
   </div><!-- /.tabpanel -->
 </div><!-- /.tab-content -->
