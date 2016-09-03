@@ -81,10 +81,9 @@ export class MainChartComponent implements OnInit {
         //todo pass the dutyCycleHours array to the chart, build chartData in chart code
         chartData.push([
           {v: (day - 1) * 24 + h, f: `Day ${day}, Hour ${this.hourToAmPm(h)}`},
-          //`Day ${day}, Hour ${this.hourToAmPm(h)}`,
+          currentBatteryAmps,
           hour.createdAmps,
           hour.usedAmps,
-          currentBatteryAmps,
           this.batteryChargeColor(this.userSettingsService.battery, currentBatteryAmps / this.userSettingsService.batteryAmpHours * 100), //color line if dips too low
           this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.minimumLevel / 100,
           this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.warningLevel / 100,
@@ -100,10 +99,12 @@ export class MainChartComponent implements OnInit {
 
     var data = new google.visualization.DataTable();
     data.addColumn('number', 'Day, Hour'); // Implicit domain column.
+
+    data.addColumn('number', 'Battery Charge Level'); // Implicit user_data column.
+
     data.addColumn('number', 'Amps Created'); // Implicit user_data column.
     data.addColumn('number', 'Amps Consumed'); // Implicit user_data column.
 
-    data.addColumn('number', 'Battery Charge Level'); // Implicit user_data column.
     data.addColumn({'type': 'string', 'role': 'style'});
 
     data.addColumn('number', 'Battery Safe Minimum');
