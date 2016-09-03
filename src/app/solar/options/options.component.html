@@ -2,8 +2,8 @@
   <div class="col-md-6">
 
     <table class="table table-striped table-bordered table-condensed">
-    <caption><h4>Battery Bank</h4>
-      <small>Only AGMs have correct minimum battery level data.</small>
+    <caption>
+      <h4>Battery Bank</h4>
     </caption>
     <tbody>
       <tr>
@@ -100,7 +100,26 @@
         </td>
       </tr>
       <tr>
-        <th style="vertical-align: middle;">Nominal Efficiency</th>
+        <th style="vertical-align: middle;">
+          Month
+          <small style="font-weight: normal;">
+            These percentages are an average of 2014 and 2015 from
+            <a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.cfm?t=epmt_1_01_a" target="_blank">https://www.eia.gov/...</a>
+          </small>
+        </th>
+        <td>
+          <select [(ngModel)]="userSettingsService.month" class="form-control">
+            <option *ngFor="let m of zeroToEleven" [value]="m">
+              {{ junkService.months[m] }} ({{ junkService.sunByMonth[m] * 100 | number:'1.0' }}%)
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th style="vertical-align: middle;">
+          Efficiency
+          <small style="font-weight: normal;">You can use this to account for losses from things such as controller efficiency, poor panel angles and bad weather.</small>
+        </th>
         <td>
           <div class="input-group">
             <input type="number" min="1" class="form-control" [(ngModel)]="userSettingsService.solarEfficiency">

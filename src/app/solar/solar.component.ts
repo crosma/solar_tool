@@ -30,6 +30,9 @@ export class SolarComponent implements OnInit {
   peakWattsSurgeDC = 0;
   wattHoursDC = 0;
 
+
+
+
   constructor(private userSettingsService: UserSettingsService, private consumerService: ConsumersService, private batteriesService: BatteriesService) {
     this.consumers = consumerService.getConsumers();
   }

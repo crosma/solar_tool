@@ -16,7 +16,7 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
     url: 'https://www.reddit.com/r/vandwellers/comments/4efrgd/creating_an_effective_and_ultraefficient/',
 
     currentAC: true,
-    volts: 110,
+    volts: 115,
     watts: 52,
     wattsSurge: 650,
     dutyCycle: 0.1, //6 minutes an hour
@@ -29,10 +29,12 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
     details: 'Meh.',
 
     currentAC: true,
-    volts: 110,
+    volts: 115,
     watts: 75,
 
     quantity: 1,
+
+    requirePureSine: true,
   },
 
   {
@@ -44,6 +46,8 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
     watts: 150,
 
     quantity: 0,
+
+    requirePureSine: true,
   },
 
   {
@@ -54,37 +58,36 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
     currentAC: true,
     amps: 4,
     ampsSurge: 9,
-    volts: 110,
+    volts: 115,
 
     quantity: 0,
 
-    dutyCycle: 0.33, //20 minutes an hour
     dutyCycleByHour: [
-      /*00*/ 0,
-      /*01*/ 0,
-      /*02*/ 0,
-      /*03*/ 0,
-      /*04*/ 0,
-      /*05*/ 0,
-      /*06*/ 0,
-      /*07*/ 0,
-      /*08*/ 0.33,
-      /*09*/ 0.33,
-      /*10*/ 0.33,
-      /*11*/ 0.33,
-      /*12*/ 0.33,
-      /*13*/ 0.33,
-      /*14*/ 0.33,
-      /*15*/ 0.33,
-      /*16*/ 0.33,
-      /*17*/ 0.33,
-      /*18*/ 0.33,
-      /*19*/ 0.33,
-      /*20*/ 0,
-      /*21*/ 0,
-      /*22*/ 0,
-      /*23*/ 0,
-    ], //runs 9am to 9pm
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.01212,
+      0.06061,
+      0.14545,
+      0.26667,
+      0.38182,
+      0.48485,
+      0.5697,
+      0.6,
+      0.5697,
+      0.50909,
+      0.41212,
+      0.30303,
+      0.2,
+      0.10909,
+      0.02424,
+      0,
+      0,
+      0,
+    ],
   },
 ];
 

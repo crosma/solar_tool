@@ -22,9 +22,11 @@ export class UserSettingsService {
     solarEfficiency: 75,
 
     inverterEfficiency: 90,
-    inverterOutputVolts: 110,
+    inverterOutputVolts: 120,
 
-    consumerQuantities: {}
+    consumerQuantities: {},
+
+    month: 3,
   };
 
   private settingsChangedSource = new Subject<SettingUpdate>();
@@ -130,6 +132,10 @@ export class UserSettingsService {
     return this.settings.batteryDischargeHours;
   }
 
+  get month(): number {
+    return this.settings.month;
+  }
+
 
 
   get solarVolts(): number {
@@ -170,7 +176,7 @@ export class UserSettingsService {
     return this.settings.inverterOutputVolts;
   }
 
-  set inverterOutputVolts(value: number) {
-    this.updateValue('inverterOutputVolts', value);
+  set month(value: number) {
+    this.updateValue('month', value);
   }
 }

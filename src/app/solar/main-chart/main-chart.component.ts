@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ElementRef} from '@angular/core';
-import {Battery, BatteriesService, ConsumersService, UserSettingsService} from '../../services';
+import {Battery, BatteriesService, ConsumersService, UserSettingsService, JunkService} from '../../services';
 
 declare var google: any;
 
@@ -13,7 +13,12 @@ export class MainChartComponent implements OnInit {
   containerElement = null;
   myElement = null;
 
-  constructor(myElement: ElementRef, private userSettingsService: UserSettingsService, private consumerService: ConsumersService, private batteriesService: BatteriesService) {
+  constructor(myElement: ElementRef,
+              private userSettingsService: UserSettingsService,
+              private consumerService: ConsumersService,
+              private batteriesService: BatteriesService,
+              private junkService: JunkService) {
+
     google.charts.setOnLoadCallback(this.chartOnLoad.bind(this));
 
     this.myElement = myElement;
@@ -30,51 +35,30 @@ export class MainChartComponent implements OnInit {
     this.updateGraph();
   }
 
+  onResize() {
+    this.updateGraph();
+  }
+
   chartOnLoad() {
     this.chartHasLoaded = true;
     this.updateGraph();
   }
 
+  //TODO: Debounce this function!
   updateGraph() {
     if (!this.chartHasLoaded) return;
-
-    var solarHours = {
-      0: 0,
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0.25,
-      7: 1,
-      8: 1,
-      9: 1,
-      10: 1,
-      11: 1,
-      12: 1,
-      13: 1,
-      14: 1,
-      15: 1,
-      16: 1,
-      17: 1,
-      18: 1,
-      19: 1,
-      20: 0.25,
-      21: 0,
-      22: 0,
-      23: 0,
-    };
 
     let inverterRatio = 100 / this.userSettingsService.inverterEfficiency;
     let currentBatteryAmps = this.userSettingsService.batteryAmpHours; //start at 100% battery charge
     let solarEfficiency = this.userSettingsService.solarEfficiency / 100;
+    let solarSunMonth = this.junkService.sunByMonth[this.userSettingsService.month];
     let chartData = [];
     var qty;
 
     for (let day = 1; day <= 3; day++) {
       for (var h = 0; h < 24; h++) {
         var hour: GraphPoint = {
-          createdAmps: this.userSettingsService.solarWatts / this.userSettingsService.solarVolts * solarHours[h] * solarEfficiency,
+          createdAmps: this.userSettingsService.solarWatts / this.userSettingsService.solarVolts * this.junkService.sunByHour[h] * solarEfficiency * solarSunMonth,
           usedAmps: 0,
         };
 
@@ -181,7 +165,7 @@ export class MainChartComponent implements OnInit {
           type: 'line',
           visibleInLegend: true,
           color: '#cccc00',
-          lineWidth:  this.userSettingsService.battery.minimumLevel ? 2 : 0,
+          lineWidth: this.userSettingsService.battery.minimumLevel ? 2 : 0,
           lineDashStyle: [4, 4],
         },
         4: {
