@@ -82,9 +82,9 @@ export class MainChartComponent implements OnInit {
         chartData.push([
           {v: (day - 1) * 24 + h, f: `Day ${day}, Hour ${this.hourToAmPm(h)}`},
           currentBatteryAmps,
+          this.batteryChargeColor(this.userSettingsService.battery, currentBatteryAmps / this.userSettingsService.batteryAmpHours * 100), //color line if dips too low
           hour.createdAmps,
           hour.usedAmps,
-          this.batteryChargeColor(this.userSettingsService.battery, currentBatteryAmps / this.userSettingsService.batteryAmpHours * 100), //color line if dips too low
           this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.minimumLevel / 100,
           this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.warningLevel / 100,
           this.userSettingsService.batteryAmpHours * this.userSettingsService.battery.dangerLevel / 100,
@@ -101,11 +101,10 @@ export class MainChartComponent implements OnInit {
     data.addColumn('number', 'Day, Hour'); // Implicit domain column.
 
     data.addColumn('number', 'Battery Charge Level'); // Implicit user_data column.
+    data.addColumn({'type': 'string', 'role': 'style'});
 
     data.addColumn('number', 'Amps Created'); // Implicit user_data column.
     data.addColumn('number', 'Amps Consumed'); // Implicit user_data column.
-
-    data.addColumn({'type': 'string', 'role': 'style'});
 
     data.addColumn('number', 'Battery Safe Minimum');
     data.addColumn('number', 'Battery Warning Minimum');
@@ -158,9 +157,15 @@ export class MainChartComponent implements OnInit {
       },
       seriesType: 'bars',
       series: {
-        2: {
+        0: {
           type: 'line',
           color: '#32CD32'
+        },
+        1: {
+          color: '#303F9F',
+        },
+        2: {
+          color: '#D50000',
         },
         3: {
           type: 'line',

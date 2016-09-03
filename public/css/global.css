@@ -77,3 +77,10 @@ html {
     animation: octocat-wave 560ms ease-in-out
   }
 }
+
+
+.webpack-reloading {
+  -webkit-filter: grayscale(30%); /* Chrome, Safari, Opera */
+  filter: grayscale(30%);
+  opacity: 0.5
+}

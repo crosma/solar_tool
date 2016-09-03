@@ -12,13 +12,13 @@ interface SettingUpdate {
 export class UserSettingsService {
   private settings = {
     batteryVoltsDC: 12,
-    batteryAmpHours: 200,
+    batteryAmpHours: 400,
     batteryIndex: 0,
     batteryDischargeAmps: 5,
     batteryDischargeHours: 20,
 
     solarVolts: 12,
-    solarWatts: 300,
+    solarWatts: 200,
     solarEfficiency: 75,
 
     inverterEfficiency: 90,
