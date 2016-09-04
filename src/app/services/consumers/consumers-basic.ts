@@ -416,6 +416,30 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
       0, //11pm to midnight
     ],
   },
+
+  {
+    name: 'Fan-Tastic Fan, Low',
+    amazon_asin: 'B00HQZB4I4',
+    details: `Fan-Tastic Fan on low. 24 hours a day.`,
+
+    currentAC: false,
+    amps: 1.8,
+    volts: 12,
+
+    quantity: 0,
+  },
+
+  {
+    name: 'Fan-Tastic Fan, High',
+    amazon_asin: 'B00HQZB4I4',
+    details: `Fan-Tastic Fan on high. 24 hours a day.`,
+
+    currentAC: false,
+    amps: 3,
+    volts: 12,
+
+    quantity: 0,
+  },
 ];
 
 
