@@ -26,28 +26,81 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
 
   {
     name: 'Computer - Laptop',
-    details: 'Meh.',
+    amazon_asin: 'B011KFQASE',
+    details: 'Based this one on Amazon\'s recommended "Home" laptop. The power adapter provides up to 65 watts but under normal use the laptop would use far less. I configured it for 35 watts, 8 Hours per day.',
 
     currentAC: true,
     volts: 115,
-    watts: 75,
+    watts: 35,
+    requirePureSine: true,
 
     quantity: 1,
 
-    requirePureSine: true,
+    dutyCycleByHour: [
+      0, //midnight to 1am
+      0,
+      0,
+      0,
+      0,
+      0,
+      0, //6 am
+      0,
+      0,
+      0,
+      0,
+      1,
+      1, //noon to 1pm
+      1,
+      1,
+      1,
+      1,
+      1,
+      1, //6 pm
+      0,
+      0,
+      0,
+      0,
+      0, //11pm to midnight
+    ],
   },
 
   {
     name: 'Computer - Gaming Desktop',
-    details: 'Computers use significantly more power when under loads such as gaming, should probably account for this somehow.',
+    details: 'Computers use significantly more power when under loads such as gaming, should probably account for this somehow. 8 Hours per day.',
 
     currentAC: true,
-    volts: 110,
-    watts: 150,
+    volts: 115,
+    watts: 100,
+    requirePureSine: true,
 
     quantity: 0,
 
-    requirePureSine: true,
+    dutyCycleByHour: [
+      0, //midnight to 1am
+      0,
+      0,
+      0,
+      0,
+      0,
+      0, //6 am
+      0,
+      0,
+      0,
+      0,
+      1,
+      1, //noon to 1pm
+      1,
+      1,
+      1,
+      1,
+      1,
+      1, //6 pm
+      0,
+      0,
+      0,
+      0,
+      0, //11pm to midnight
+    ],
   },
 
   {
@@ -127,6 +180,7 @@ const BasicConsumersDefinitions: ConsumerDefinitions = [
       0,
       0, //11pm to midnight
     ],
+  },
 
   {
     name: 'TV - 24" 12V DC',
