@@ -1,6 +1,6 @@
 import { SolarToolPage } from './app.po';
 
-describe('solar_tool App', function() {
+describe('solar-tool App', function() {
   let page: SolarToolPage;
 
   beforeEach(() => {

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ng build #--prod
+ng build --prod
 
 git add -f dist
 git commit -m "Updating gh-pages (temp message)"

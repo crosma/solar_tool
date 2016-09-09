@@ -45,12 +45,9 @@ export class ConsumersService {
       ];
 
       for (var i = 0; i < this.cacheGroups.length; i++) {
-        console.log('con', this.cacheGroups[i].consumers);
         this.cacheFlat = this.cacheFlat.concat(this.cacheGroups[i].consumers);
       }
     }
-
-    console.log(this);
   }
 
   getConsumerGroups(): ConsumerGroups {
