@@ -6,6 +6,7 @@ import {routing, appRoutingProviders} from './app.routing';
 
 //components
 import {AppComponent} from './app.component';
+import {IndexComponent} from './index/index.component';
 import {SolarComponent} from './solar/solar.component';
 import {AboutComponent} from './about/about.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
@@ -16,6 +17,7 @@ import {BootstrapTab} from './directives/bootstrap-tab.directive';
 //services
 import {BatteriesService, ConsumersService, UserSettingsService, JunkService} from './services';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import {BatteriesService, ConsumersService, UserSettingsService, JunkService} fr
     AboutComponent,
     PageNotFoundComponent,
     BootstrapTab,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
 import {Component, OnInit, OnChanges, SimpleChange} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 //data
 import {Battery, BatteriesService, ConsumersService, UserSettingsService} from '../services';
@@ -24,21 +26,47 @@ export class SolarComponent implements OnInit {
   peakWattsSurgeAC = 0;
   wattHoursAC = 0;
 
-  selectedBattery: Battery;
-
   peakWattsDC = 0;
   peakWattsSurgeDC = 0;
   wattHoursDC = 0;
 
+  private sub: Subscription;
 
+  tabs = [
+    {id: 'consumers', name: 'Power Consumers'},
+    {id: 'config', name: 'Configuration'},
+    {id: 'data', name: 'Data'},
+  ];
+  current_tab_id = this.tabs[0].id;
 
+  constructor(private userSettingsService: UserSettingsService,
+              private consumerService: ConsumersService,
+              private route: ActivatedRoute,
+              private router: Router) {
 
-  constructor(private userSettingsService: UserSettingsService, private consumerService: ConsumersService, private batteriesService: BatteriesService) {
     this.consumers = consumerService.getConsumers();
   }
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      if (params['tab']) {
+        this.current_tab_id = params['tab'];
+      }
+    });
+
     this.update();
+  }
+
+  setTab(tab) {
+    this.router.navigate(['/calculator', {
+      tab: tab.id
+    }]);
+
+    return false;
+  }
+
+  isSelectedTab(id) {
+    return id == this.current_tab_id;
   }
 
   update() {

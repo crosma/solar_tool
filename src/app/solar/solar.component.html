@@ -4,27 +4,22 @@
   </div>
 </div>
 
-<ul bootstrapTabs class="nav nav-tabs" role="tablist">
-  <li role="presentation" class="active">
-    <a bootstrapTab="tab_group" href="#consumers" aria-controls="consumers" role="tab" data-toggle="consumers">Power Consumers</a>
+<ul class="nav nav-tabs" role="tablist">
+  <li *ngFor="let tab of tabs;" role="presentation" [class.active]="isSelectedTab(tab.id)">
+    <a bootstrapTab="tab_group" href="#" role="tab" (click)="setTab(tab)">{{ tab.name }}</a>
   </li>
-  <li role="presentation">
-    <a bootstrapTab="tab_group" href="#options" aria-controls="options" role="tab" data-toggle="options">Configuration</a>
-  </li>
-  <li role="presentation">
-    <a bootstrapTab="tab_group" href="#data" aria-controls="data" role="tab" data-toggle="data">Data</a></li>
 </ul>
 
 <div class="tab-content" id="tab_group">
-  <div role="tabpanel" class="tab-pane active" id="consumers">
+  <div role="tabpanel" class="tab-pane" [class.active]="isSelectedTab('consumers')">
     <app-consumers></app-consumers>
   </div><!-- /.tabpanel -->
 
-  <div role="tabpanel" class="tab-pane" id="options">
+  <div role="tabpanel" class="tab-pane" [class.active]="isSelectedTab('config')">
     <app-options></app-options>
   </div><!-- /.tabpanel -->
 
-  <div role="tabpanel" class="tab-pane" id="data">
+  <div role="tabpanel" class="tab-pane" [class.active]="isSelectedTab('data')">
     <app-data></app-data>
   </div><!-- /.tabpanel -->
 </div><!-- /.tab-content -->

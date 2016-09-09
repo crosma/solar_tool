@@ -14,7 +14,7 @@ export class BootstrapTab {
 
   @HostListener('click', ['$event'])
   onClick(event) {
-    event.preventDefault();
-    $(this.el).tab('show');
+    //event.preventDefault();
+    //$(this.el).tab('show');
   }
 }

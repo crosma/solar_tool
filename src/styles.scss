@@ -86,3 +86,10 @@ html {
   filter: grayscale(30%);
   opacity: 0.5
 }
+
+.nav-tabs > li > a {
+  font-size: 0.9em;
+  padding: 8px 10px;
+  margin-right: 4px;
+  line-height: 16px;
+}

@@ -9,9 +9,11 @@ declare var google: any;
   styleUrls: ['main-chart.component.scss']
 })
 export class MainChartComponent implements OnInit {
-  chartHasLoaded = false;
-  containerElement = null;
-  myElement = null;
+  private chartHasLoaded = false;
+  private ngHasLoaded = false;
+
+  private containerElement = null;
+  private myElement = null;
 
   constructor(myElement: ElementRef,
               private userSettingsService: UserSettingsService,
@@ -32,6 +34,7 @@ export class MainChartComponent implements OnInit {
     var div = this.myElement.nativeElement.getElementsByClassName("chart");
     this.containerElement = div[0];
 
+    this.ngHasLoaded = true;
     this.updateGraph();
   }
 
@@ -46,7 +49,7 @@ export class MainChartComponent implements OnInit {
 
   //TODO: Debounce this function!
   updateGraph() {
-    if (!this.chartHasLoaded) return;
+    if (!this.chartHasLoaded || !this.ngHasLoaded) return;
 
     let inverterRatio = 100 / this.userSettingsService.inverterEfficiency;
     let currentBatteryAmps = this.userSettingsService.batteryAmpHours; //start at 100% battery charge
