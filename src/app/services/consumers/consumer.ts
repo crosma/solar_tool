@@ -1,4 +1,6 @@
-//http://www.rapidtables.com/calc/electric/watt-volt-amp-calculator.htm
+import {DefinitionsBasic} from './consumers-basic';
+import {DefinitionsLights} from './consumers-lights';
+import {DefinitionsKitchen} from './consumers-kitchen';
 
 export declare type ConsumerDefinitions = ConsumerDefinition[];
 
@@ -78,7 +80,15 @@ export class Consumer {
   }
 }
 
+
 export declare type Consumers = Consumer[];
+
+export interface ConsumerGroup {
+  name: string;
+  consumers: Consumers;
+}
+
+export declare type ConsumerGroups = ConsumerGroup[];
 
 export function createConsumersFromDefinitions(defs: ConsumerDefinitions): Consumers {
   let list: Consumers = [];

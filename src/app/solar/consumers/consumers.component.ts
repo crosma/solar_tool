@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConsumersService, UserSettingsService} from '../../services';
-import {Consumers} from '../../services/consumers'
+import {ConsumerGroups} from '../../services/consumers'
 
 @Component({
   selector: 'app-consumers',
@@ -8,11 +8,11 @@ import {Consumers} from '../../services/consumers'
   styleUrls: ['consumers.component.scss']
 })
 export class ConsumersComponent implements OnInit {
-  consumers: Consumers;
+  consumerGroups: ConsumerGroups;
 
 
   constructor(private userSettingsService: UserSettingsService, private consumerService: ConsumersService) {
-    this.consumers = consumerService.getConsumers();
+    this.consumerGroups = consumerService.getConsumerGroups();
   }
 
   ngOnInit() {
