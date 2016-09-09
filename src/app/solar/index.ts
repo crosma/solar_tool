@@ -1,1 +1,0 @@
-export * from './solar.component';
